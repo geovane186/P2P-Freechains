@@ -343,7 +343,7 @@ def chainMenu():
     global exit
     global posts
     while menuType == 2:
-        print_menu(menuType, posts)
+        print_menu(menuType)
         selection = input("Sua escolha: ")
         if "1" == selection:
             act1Menu2()
@@ -365,7 +365,7 @@ def postMenu():
     global chainName
     global exit
     while menuType == 3:
-        print_menu(menuType)
+        print_menu(menuType, posts, chainName)
         selection = input("Sua escolha: ")
         if "1" == selection:
             act1Menu3(chainName)
