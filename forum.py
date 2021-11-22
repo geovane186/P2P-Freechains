@@ -223,8 +223,11 @@ def act1Menu1():
 	return privateKey, publicKey, menuType
 
 def act1Menu2():
-	print('\nDisciplinas:\n')
-	print(listChain)
+	if listChain != '':
+		print('\nDisciplinas:\n')
+		print(listChain)
+	else:
+		print('Não existem Disciplinas disponiveis')
 
 def act2Menu2(publicKey):
 	print('\nIngressar em Disciplina\n')
