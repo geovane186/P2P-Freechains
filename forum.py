@@ -247,7 +247,6 @@ def act3Menu2():
 	chainName = input('Insira o nome da disciplina: ')
 	leaveChain(chainName)
 
-
 def act4Menu2():
 	menuType = 1
 	return menuType
@@ -347,6 +346,8 @@ def chainMenu():
         if "3" == selection:
             act3Menu2()
         if "4" == selection:
+            menuType = act4Menu2()
+        if "5" == selection:
             exit = True
             return
 
