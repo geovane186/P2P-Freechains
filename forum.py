@@ -160,9 +160,11 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 
 def updatePostList(newsPosts, posts):
 	for post in newsPosts:
-		if post in posts:
-			continue
 		newPost = (post, '', '')
+		if newPost in posts:
+			print('entrou')
+			continue
+		print('diferente', post)
 		posts.append(newPost)
 
 def updateBlockedPostList():
