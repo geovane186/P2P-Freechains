@@ -35,7 +35,8 @@ def newKey(passwrd):
 	freeExec = subprocess.run(
 		["freechains", "crypto", "pubpvt", passwrd], capture_output=True, text=True
 	)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 	
 	return freeExec.stdout.split(' ')
 
@@ -336,7 +337,7 @@ def chainMenu():
         print_menu(menuType, posts)
         selection = input("Sua escolha: ")
         if "1" == selection:
-            privateKey, publicKey = act1Menu2(privateKey, publicKey)
+            act1Menu2()
         if "2" == selection:
             chain, chainName, menuType = act2Menu2(publicKey)
         if "3" == selection:
