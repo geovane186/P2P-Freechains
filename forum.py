@@ -43,13 +43,13 @@ def newKey(passwrd):
 def joinChain(chainName, publicKey):
 	
 	chain = chainName
-	chain = '#' + chain
-	freeExec = subprocess.run(
-		["freechains", "chains", "join", chain, publicKey], capture_output=True, text=True
-	)
+	print(type(chain))
+#	freeExec = subprocess.run(
+#		["freechains", "chains", "join", chain, publicKey], capture_output=True, text=True
+#	)
 
-	print("stderr:", freeExec.stderr)
-	return freeExec.stdout
+#	print("stderr:", freeExec.stderr)
+#	return freeExec.stdout
 
 def leaveChain(chainName):
 	freeExec = subprocess.run(
