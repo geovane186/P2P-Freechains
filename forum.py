@@ -42,7 +42,8 @@ def newKey(passwrd):
 
 def joinChain(chainName, publicKey):
 	
-	chain = '#' + chainName
+	chain = chainName
+	chain = '#' + chain
 	freeExec = subprocess.run(
 		["freechains", "chains", "join", chain, publicKey], capture_output=True, text=True
 	)
