@@ -180,14 +180,14 @@ def print_menu(menuType, posts=None, chainName=None):
 		print('1 - Criar novo par de Chaves.\n2 - Sair')
 	
 	if menuType == 2:
-		print('Forum Responde Ai.\n')
+		print('\nForum Responde Ai.\n')
 		
 		print('Selecione uma opção no menu abaixo:\n')
 		
 		print('1 - Listar disciplinas.\n2 - Ingressar em uma nova/existente disciplina.\n3 - Sair da disciplina\n4 - Voltar ao menu anterior.\n5 - Sair')
 	
 	if menuType == 3:
-		print('Forum Responde Ai.\n')
+		print('\nForum Responde Ai.\n')
 
 		newsPosts = listPosts(chainName)
 		updatePostList(newsPosts, posts)
@@ -213,10 +213,9 @@ def print_menu(menuType, posts=None, chainName=None):
 		print('1 - Receber novos Post.\n2 - Enviar novos Post.\n3 - Visualizar post.\n4 - Criar novo post.\n5 - Curtir Post.\n6 - Descurtir Post.\n7 - Visualizar reputacao.\n8 - Voltar ao menu anterior.\n9 - Sair')
 	
 def act1Menu1():
-	print('\nCriação de Chave\n')
+	print('Criação de Chave\n')
 
 	passwrd = input('Insira sua senha segura: ')
-	print('Senha: ' + passwrd)
 	publicKey,privateKey = newKey(passwrd)
 
 	menuType = 2
@@ -224,8 +223,8 @@ def act1Menu1():
 	return privateKey, publicKey, menuType
 
 def act1Menu2():
-	print('\nDisciplinas:'+listChain+'\n')
-	#print(listChain)
+	print('\nDisciplinas:\n')
+	print(listChain)
 
 def act2Menu2(publicKey):
 	print('\nIngressar em Disciplina\n')
