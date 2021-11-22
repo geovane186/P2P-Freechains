@@ -108,7 +108,8 @@ def listBlockedPosts(chainName):
 	freeExec = subprocess.run(
 		['freechains', 'chain', "#"+str(chainName), 'heads', 'blocked'], capture_output=True, text=True
 	)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 	ps = freeExec.stdout.split(' ')
 	listPosts = []
@@ -173,7 +174,7 @@ def updateBlockedPostList():
 		blockedPost = (post, '', '')
 		blockedPosts.append(blockedPost)
 
-def print_menu(menuType, posts=None, chainName=None):
+def print_menu(menuType, posts=None, chainName=None, blockedPosts=None):
 	if menuType == 1:
 		print('Bem vindo ao Forum.\n')
 		
@@ -363,9 +364,10 @@ def postMenu():
     global publicKey
     global menuType
     global chainName
+    global blockedPosts
     global exit
     while menuType == 3:
-        print_menu(menuType, posts, chainName)
+        print_menu(menuType, posts, chainName, blockedPosts)
         selection = input("Sua escolha: ")
         if "1" == selection:
             act1Menu3(chainName)
@@ -395,6 +397,7 @@ if __name__ == "__main__":
 	
 	privateKey, publicKey, chain, chainName = '', '', '', ''
 	posts = []
+	blockedPosts = []
 	exit = False
 	menuType = 1
 	while exit == False:
