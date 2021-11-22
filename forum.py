@@ -74,7 +74,7 @@ def newPost(chainName, privateKey, pathFile):
 
 def getPost(chainName, post, outputFile):
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+chainName, 'get', 'payload' + post, 'file', outputFile], capture_output=True, text=True
+		['freechains', 'chain', "#"+chainName, 'get', 'payload', post, 'file', outputFile], capture_output=True, text=True
 	)
 	print("stderr:", freeExec.stderr)
 
