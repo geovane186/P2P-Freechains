@@ -242,10 +242,14 @@ def act2Menu2(publicKey):
 	return chain, chainName, menuType
 
 def act3Menu2():
-	print('\nSair da Disciplina\n')
-
-	chainName = input('Insira o nome da disciplina: ')
-	leaveChain(chainName)
+	chains = listChain()
+	if chains != '':
+		print('\nSair da Disciplina\n')
+		
+		chainName = input('Insira o nome da disciplina: ')
+		leaveChain(chainName)
+	else:
+		print('Não existem disciplinas disponiveis')
 
 def act4Menu2():
 	menuType = 1
