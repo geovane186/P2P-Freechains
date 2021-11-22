@@ -29,7 +29,8 @@ import sys
 def startHost(hostPort, dirPath):
 	freeExec = subprocess.Popen(["freechains-host", '--port='+hostPort, 'start', dirPath], stdout=None, stderr=subprocess.STDOUT);
 	print("stdout:", freeExec.stdout)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 def newKey(passwrd):
 	freeExec = subprocess.run(
@@ -54,7 +55,8 @@ def leaveChain(chainName):
 		["freechains", "chains", "leave", "#"+str(chainName)], capture_output=True, text=True
 	)
 
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 def listChain():
 	freeExec = subprocess.run(
@@ -69,7 +71,8 @@ def newPost(chainName, privateKey, pathFile):
 	freeExec = subprocess.run(
 		['freechains', 'chain', "#"+str(chainName), 'post', '--sign=' + privateKey, 'file', pathFile], capture_output=True, text=True
 	)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 	return freeExec.stdout
 
@@ -77,7 +80,8 @@ def getPost(chainName, post, outputFile):
 	freeExec = subprocess.run(
 		['freechains', 'chain', "#"+str(chainName), 'get', 'payload', post, 'file', outputFile], capture_output=True, text=True
 	)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 	return freeExec.stdout
 
@@ -85,7 +89,8 @@ def likePost(chainName, post, privateKey, msg):
 	freeExec = subprocess.run(
 		['freechains', 'chain', "#"+str(chainName), 'like', post, '--sign=' + privateKey, '--why='+ msg], capture_output=True, text=True
 	)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 	return freeExec.stdout
 
@@ -122,7 +127,8 @@ def dislikePost(chainName, post, privateKey, msg):
 	freeExec = subprocess.run(
 		['freechains', 'chain', "#"+str(chainName), 'dislike', post, '--sign=' + privateKey, '--why='+ msg], capture_output=True, text=True
 	)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 	return freeExec.stdout
 
@@ -130,7 +136,8 @@ def getRepsPost(chainName, post):
 	freeExec = subprocess.run(
 		['freechains', 'chain', "#"+str(chainName), 'reps', post], capture_output=True, text=True
 	)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 	return freeExec.stdout
 
@@ -138,7 +145,8 @@ def getRepsUser(chainName, publicKey):
 	freeExec = subprocess.run(
 		['freechains', 'chain', "#"+str(chainName), 'reps', publicKey], capture_output=True, text=True
 	)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 	return freeExec.stdout
 
@@ -146,7 +154,8 @@ def sendChainHost(chainName, hostIp, hostPort, destIp, destPort):
 	freeExec = subprocess.run(
 		['freechains', '--host='+hostIp+':'+hostPort, 'peer', destIp+':'+destPort, 'send', "#"+str(chainName)], capture_output=True, text=True
 	)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 	return freeExec.stdout
 
@@ -154,7 +163,8 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 	freeExec = subprocess.run(
 		['freechains', '--host='+hostIp+':'+hostPort, 'peer', origIp+':'+origPort, 'recv', "#"+str(chainName)], capture_output=True, text=True
 	)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 	return freeExec.stdout
 
@@ -162,18 +172,16 @@ def updatePostList(newsPosts, posts):
 	for post in newsPosts:
 		newPost = (post, '', '')
 		if newPost in posts:
-			print('entrou')
 			continue
-		print('diferente', post)
 		posts.append(newPost)
 
 def updateBlockedPostList():
 	newBlockedPosts = listBlockedPosts(chainName)
 	blockedPosts = []
 	for post in newBlockedPosts:
-		if post in posts:
-			continue
 		blockedPost = (post, '', '')
+		if blockedPost in posts:
+			continue
 		blockedPosts.append(blockedPost)
 
 def print_menu(menuType, posts=None, chainName=None, blockedPosts=None):
