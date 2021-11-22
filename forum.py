@@ -218,8 +218,6 @@ def act1Menu1():
 	print('Senha: ' + passwrd)
 	publicKey,privateKey = newKey(passwrd)
 
-#	publicKey,privateKey = '1','2'
-
 	menuType = 2
 	
 	return privateKey, publicKey, menuType
@@ -390,6 +388,6 @@ if __name__ == "__main__":
 		if menuType == 1:
 			startMenu()
 		elif menuType == 2:
-			chainMenu(privateKey, publicKey, chain, chainName)
+			chainMenu()
 		elif menuType == 3:
-			postMenu(privateKey, publicKey, chain, chainName)
+			postMenu()
