@@ -88,6 +88,32 @@ def likePost(chainName, post, privateKey, msg):
 
 	return freeExec.stdout
 
+def listPosts(chainName):
+	freeExec = subprocess.run(
+		['freechains', 'chain', "#"+chainName, 'heads'], capture_output=True, text=True
+	)
+	print("stderr:", freeExec.stderr)
+
+	ps = freeExec.stdout.split(' ')
+	listPosts = []
+	for i in ps:
+		listPosts.append(i)
+
+	return listPosts
+
+def listBlockedPosts(chainName):
+	freeExec = subprocess.run(
+		['freechains', 'chain', "#"+chainName, 'heads', 'blocked'], capture_output=True, text=True
+	)
+	print("stderr:", freeExec.stderr)
+
+	ps = freeExec.stdout.split(' ')
+	listPosts = []
+	for i in ps:
+		listPosts.append(i)
+
+	return listPosts
+
 def dislikePost(chainName, post, privateKey, msg):
 	freeExec = subprocess.run(
 		['freechains', 'chain', "#"+chainName, 'dislike', post, '--sign=' + privateKey, '--why='+ msg], capture_output=True, text=True
@@ -128,7 +154,23 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 
 	return freeExec.stdout
 
-def print_menu(menuType):
+def updatePostList(newsPosts, posts):
+	for post in newsPosts:
+		if post in posts:
+			continue
+		newPost = (post, '', '')
+		posts.append(newPost)
+
+def updateBlockedPostList():
+	newBlockedPosts = listBlockedPosts(chainName)
+	blockedPosts = []
+	for post in newBlockedPosts:
+		if post in posts:
+			continue
+		blockedPost = (post, '', '')
+		blockedPosts.append(blockedPost)
+
+def print_menu(menuType, posts=None, chainName=None):
 	if menuType == 1:
 		print('Bem vindo ao Forum.\n')
 		
@@ -145,7 +187,26 @@ def print_menu(menuType):
 	
 	if menuType == 3:
 		print('Forum Responde Ai.\n')
+
+		newsPosts = listPosts(chainName)
+		updatePostList(newsPosts, posts)
+
+		print('Posts:\n')
+		if len(posts) != 0:
+			for post in posts:
+				print('File Name: '+post[(1)]+' Hash: '+post[(0)]+'\n')
+		else:
+			print('Sem posts na Disciplina\n')
 		
+		print('Blocked Posts:\n')
+		blockedPosts = updateBlockedPostList()
+
+		if len(blockedPosts) != 0:
+			for post in blockedPosts:
+				print('File Name: '+post[(1)]+' Hash: '+post[(0)]+'\n')
+		else:
+			print('Sem posts bloqueados na Disciplina\n')
+	
 		print('Selecione uma opção no menu abaixo:\n')
 		
 		print('1 - Receber novos Post.\n2 - Enviar novos Post.\n3 - Visualizar post.\n4 - Criar novo post.\n5 - Curtir Post.\n6 - Descurtir Post.\n7 - Visualizar reputacao.\n8 - Voltar ao menu anterior.\n9 - Sair')
@@ -214,12 +275,17 @@ def act3Menu3(chainName):
 	print(getPost(chainName, post, outputFile))
 	print('\nA Reputacao do post é '+getRepsPost(chainName, post))
 
-def act4Menu3(chainName, privateKey):
+def act4Menu3(chainName, privateKey, posts):
 	print('\nCriar Post\n')
 
+	nameFile = input('Insira o nome do arquivo: ')
 	pathFile = input('Insira o path do arquivo: ')
 
-	print(newPost(chainName, privateKey, pathFile))
+	#print(newPost(chainName, privateKey, pathFile))
+	
+	post = (newPost(chainName, privateKey, pathFile), nameFile, privateKey)
+	posts.append(post)
+
 
 def act5Menu3(chainName, privateKey):
 	print('\nCurtir Post\n')
@@ -267,8 +333,9 @@ def chainMenu():
     global chain
     global chainName
     global exit
+    global posts
     while menuType == 2:
-        print_menu(menuType)
+        print_menu(menuType, posts)
         selection = input("Sua escolha: ")
         if "1" == selection:
             privateKey, publicKey = act1Menu2(privateKey, publicKey)
@@ -316,6 +383,7 @@ if __name__ == "__main__":
 	#startHost(hostPort, dirPath)
 	
 	privateKey, publicKey, chain, chainName = '', '', '', ''
+	posts = []
 	exit = False
 	menuType = 1
 	while exit == False:
