@@ -41,11 +41,9 @@ def newKey(passwrd):
 	return freeExec.stdout.split(' ')
 
 def joinChain(chainName, publicKey):
-	
-	chain = '#'+str(chainName)
 
 	freeExec = subprocess.run(
-		["freechains", "chains", "join", chain, publicKey], capture_output=True, text=True
+		["freechains", "chains", "join", '#'+str(chainName), publicKey], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -53,7 +51,7 @@ def joinChain(chainName, publicKey):
 
 def leaveChain(chainName):
 	freeExec = subprocess.run(
-		["freechains", "chains", "leave", "#"+chainName], capture_output=True, text=True
+		["freechains", "chains", "leave", "#"+str(chainName)], capture_output=True, text=True
 	)
 
 	print("stderr:", freeExec.stderr)
@@ -69,7 +67,7 @@ def listChain():
 
 def newPost(chainName, privateKey, pathFile):
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+chainName, 'post', '--sign=' + privateKey, 'file', pathFile], capture_output=True, text=True
+		['freechains', 'chain', "#"+str(chainName), 'post', '--sign=' + privateKey, 'file', pathFile], capture_output=True, text=True
 	)
 	print("stderr:", freeExec.stderr)
 
@@ -77,7 +75,7 @@ def newPost(chainName, privateKey, pathFile):
 
 def getPost(chainName, post, outputFile):
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+chainName, 'get', 'payload', post, 'file', outputFile], capture_output=True, text=True
+		['freechains', 'chain', "#"+str(chainName), 'get', 'payload', post, 'file', outputFile], capture_output=True, text=True
 	)
 	print("stderr:", freeExec.stderr)
 
@@ -85,16 +83,15 @@ def getPost(chainName, post, outputFile):
 
 def likePost(chainName, post, privateKey, msg):
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+chainName, 'like', post, '--sign=' + privateKey, '--why='+ msg], capture_output=True, text=True
+		['freechains', 'chain', "#"+str(chainName), 'like', post, '--sign=' + privateKey, '--why='+ msg], capture_output=True, text=True
 	)
 	print("stderr:", freeExec.stderr)
 
 	return freeExec.stdout
 
 def listPosts(chainName):
-	chain = "#"+chainName
 	freeExec = subprocess.run(
-		['freechains', 'chain', chain, 'heads'], capture_output=True, text=True
+		['freechains', 'chain', '#'+str(chainName), 'heads'], capture_output=True, text=True
 	)
 	print("stderr:", freeExec.stderr)
 
@@ -107,7 +104,7 @@ def listPosts(chainName):
 
 def listBlockedPosts(chainName):
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+chainName, 'heads', 'blocked'], capture_output=True, text=True
+		['freechains', 'chain', "#"+str(chainName), 'heads', 'blocked'], capture_output=True, text=True
 	)
 	print("stderr:", freeExec.stderr)
 
@@ -120,7 +117,7 @@ def listBlockedPosts(chainName):
 
 def dislikePost(chainName, post, privateKey, msg):
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+chainName, 'dislike', post, '--sign=' + privateKey, '--why='+ msg], capture_output=True, text=True
+		['freechains', 'chain', "#"+str(chainName), 'dislike', post, '--sign=' + privateKey, '--why='+ msg], capture_output=True, text=True
 	)
 	print("stderr:", freeExec.stderr)
 
@@ -128,7 +125,7 @@ def dislikePost(chainName, post, privateKey, msg):
 
 def getRepsPost(chainName, post):
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+chainName, 'reps', post], capture_output=True, text=True
+		['freechains', 'chain', "#"+str(chainName), 'reps', post], capture_output=True, text=True
 	)
 	print("stderr:", freeExec.stderr)
 
@@ -136,7 +133,7 @@ def getRepsPost(chainName, post):
 
 def getRepsUser(chainName, publicKey):
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+chainName, 'reps', publicKey], capture_output=True, text=True
+		['freechains', 'chain', "#"+str(chainName), 'reps', publicKey], capture_output=True, text=True
 	)
 	print("stderr:", freeExec.stderr)
 
@@ -144,7 +141,7 @@ def getRepsUser(chainName, publicKey):
 
 def sendChainHost(chainName, hostIp, hostPort, destIp, destPort):
 	freeExec = subprocess.run(
-		['freechains', '--host='+hostIp+':'+hostPort, 'peer', destIp+':'+destPort, 'send', "#"+chainName], capture_output=True, text=True
+		['freechains', '--host='+hostIp+':'+hostPort, 'peer', destIp+':'+destPort, 'send', "#"+str(chainName)], capture_output=True, text=True
 	)
 	print("stderr:", freeExec.stderr)
 
@@ -152,7 +149,7 @@ def sendChainHost(chainName, hostIp, hostPort, destIp, destPort):
 
 def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 	freeExec = subprocess.run(
-		['freechains', '--host='+hostIp+':'+hostPort, 'peer', origIp+':'+origPort, 'recv', "#"+chainName], capture_output=True, text=True
+		['freechains', '--host='+hostIp+':'+hostPort, 'peer', origIp+':'+origPort, 'recv', "#"+str(chainName)], capture_output=True, text=True
 	)
 	print("stderr:", freeExec.stderr)
 
