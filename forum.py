@@ -61,8 +61,9 @@ def listChain():
 	freeExec = subprocess.run(
 		["freechains", "chains", "list"], capture_output=True, text=True
 	)
-
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
+	
 	return freeExec.stdout
 
 def newPost(chainName, privateKey, pathFile):
@@ -223,9 +224,10 @@ def act1Menu1():
 	return privateKey, publicKey, menuType
 
 def act1Menu2():
-	if listChain != '':
+	chains = listChain()
+	if chains != '':
 		print('\nDisciplinas:\n')
-		print(listChain)
+		print(chains)
 	else:
 		print('Não existem Disciplinas disponiveis')
 
