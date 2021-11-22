@@ -90,10 +90,12 @@ def likePost(chainName, post, privateKey, msg):
 	return freeExec.stdout
 
 def listPosts(chainName):
+	print(chainName)
 	freeExec = subprocess.run(
 		['freechains', 'chain', '#'+str(chainName), 'heads'], capture_output=True, text=True
 	)
-	print("stderr:", freeExec.stderr)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
 
 	ps = freeExec.stdout.split(' ')
 	listPosts = []
