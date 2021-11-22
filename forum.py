@@ -196,7 +196,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None):
 		updatePostList(newsPosts, posts)
 
 		print('Posts:\n')
-		if len(posts) != 0:
+		if posts:
 			for post in posts:
 				print('File Name: '+post[(1)]+' Hash: '+post[(0)]+'\n')
 		else:
@@ -205,7 +205,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None):
 		print('Blocked Posts:\n')
 		blockedPosts = updateBlockedPostList()
 
-		if len(blockedPosts) != 0:
+		if blockedPosts:
 			for post in blockedPosts:
 				print('File Name: '+post[(1)]+' Hash: '+post[(0)]+'\n')
 		else:
