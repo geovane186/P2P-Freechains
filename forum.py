@@ -239,6 +239,7 @@ def act2Menu2(publicKey):
 	chain = joinChain(chainName, publicKey)
 
 	menuType = 3
+	print('act'+str(chainName))
 
 	return chain, chainName, menuType
 
@@ -348,6 +349,7 @@ def chainMenu():
             act1Menu2()
         if "2" == selection:
             chain, chainName, menuType = act2Menu2(publicKey)
+            print(chainName)
         if "3" == selection:
             act3Menu2()
         if "4" == selection:
