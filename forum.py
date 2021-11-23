@@ -224,7 +224,7 @@ def listPosts(chainName):
 	for post in posts:
 		post = post.replace('\n', '')
 		if isPost(chainName, post):
-			if getRepsPost(chainName, post) != -1:
+			if getRepsPost(chainName, post) != '-1':
 				listPosts.append(post)
 	return listPosts
 
@@ -349,7 +349,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 
 		newsPosts = listPosts(chainName)
 		print(newsPosts)
-		updatePostList(newsPosts, posts)
+		updatePostList(chainName, newsPosts, posts)
 
 		print('Posts:\n')
 		if posts:
