@@ -1,22 +1,3 @@
-""" Menu
-- Criação de Chaves Publica e Privada
-	- Criação ou Ingresso em Cadeia existente
-		- Visualizar Post's
-			- Curtir ou descurtir Post
-		- Publicar Post
-		- Reputação na Cadeia
- """
-
-""" import subprocess
-import sys
-
-result = subprocess.run(
-    ["freechains-host", "--port=8331", "start", "/tmp/othost&"], capture_output=True, text=True
-)
-p = subprocess.Popen(["freechains-host", 'now'], stdout=None, stderr=subprocess.STDOUT);
-print("stdout:", p.stdout)
-print("stderr:", p.stderr) """
-
 from os import putenv
 import subprocess
 import sys
@@ -238,9 +219,6 @@ def listPosts(chainName):
 	for post in posts:
 		post = post.replace('\n', '')
 		if isPost(chainName, post):
-			#repPost = getRepsPost(chainName, post)
-			#repPost = repPost.replace('\n', '')
-			#if repPost != '-1':
 			listPosts.append(post)
 	return listPosts
 
@@ -421,7 +399,6 @@ def act1Menu1():
 	return password, privateKey, publicKey, menuType
 
 def act1Menu2(chains):
-	#chains = listChain()
 	if chains != []:
 		print('\nDisciplinas:\n')
 		for chain in chains:
@@ -472,8 +449,6 @@ def act5Menu2():
 def act1Menu3(chainName):
 	print('\nReceber Posts\n')
 	
-	#hostIp = input('Insira o seu host ip: ')
-	#hostPort = input('Insira a porta de execucao: ')
 	origIp = input('Insira o host ip de origem: ')
 	origPort = input('Insira a porta de execucao de origem: ')
 	recvChainHost(chainName, origIp, origPort)
@@ -481,8 +456,6 @@ def act1Menu3(chainName):
 def act2Menu3(chainName):
 	print('\nEnviar Posts\n')
 	
-	#hostIp = input('Insira o seu host ip: ')
-	#hostPort = input('Insira a porta de execucao: ')
 	destIp = input('Insira o host ip de destino: ')
 	destPort = input('Insira a porta de execucao de destino: ')
 	sendChainHost(chainName, destIp, destPort)
@@ -499,10 +472,6 @@ def act3Menu3(chainName, posts):
 		if hash == post.getHash():
 			exist = True
 			res = getPost(chainName, hash, outputFile)
-			#print(getPost(chainName, hash, outputFile))
-			#post.setReputation(getRepsPost(chainName, hash))
-			#print('\nA Reputacao do post é '+str(getRepsPost(chainName, hash)))
-			#print('\nA Reputacao do post é '+str(post.getReputation()))
 			print('Post Baixado com sucesso.')
 	if not exist:
 		print('Post não encontrado.')
