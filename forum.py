@@ -384,6 +384,8 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		
 		print('User: '+ str(publicKey)+' Reps: '+ str(reputation)+'\n')
 
+		print('Disciplina: '+chainName)
+
 		newsPosts = listPosts(chainName)
 		updatePostList(chainName, newsPosts, posts)
 
@@ -619,7 +621,7 @@ def postMenu():
     global exit
     while menuType == 3:
         user.setReputation(getRepsUser(chainName=chain.getName(), publicKey=user.getPublicKey()))
-        print_menu(menuType, posts, chain.getName(), blockedPosts, publicKey=user.getPublicKey(), reputation=user.getReputation())
+        print_menu(menuType, posts, chainName=chain.getName(), blockedPosts=blockedPosts, publicKey=user.getPublicKey(), reputation=user.getReputation())
         selection = input("Sua escolha: ")
         print('--------------------------------------------------------------------------------------')
         if "1" == selection:
