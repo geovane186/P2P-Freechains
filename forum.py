@@ -311,6 +311,7 @@ def updatePostList(chainName, newsPosts, posts):
 
 def updateBlockedPostList(chainName, blockedPosts):
 	newBlockedPosts = listBlockedPosts(chainName)
+	print(newBlockedPosts)
 	exist = False
 	for newPost in newBlockedPosts:
 		p = Post()
