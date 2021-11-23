@@ -381,8 +381,8 @@ def act3Menu2(chains):
 	print('\nIngressar em Disciplina Existente\n')
 	exist = False
 	chainName = input('Insira o nome da Disciplina: ')
+	print(chains)
 	for c in chains:
-		print(c)
 		if chainName == c.getName():
 			print('entrou')
 			exist = True
