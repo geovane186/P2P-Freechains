@@ -21,6 +21,7 @@ from os import putenv
 import subprocess
 import sys
 import json 
+import time
 
 class User:
 	def __init__(self):
@@ -647,6 +648,7 @@ if __name__ == "__main__":
 	hostPort = input('Insira a porta de execucao: ')
 	dirPath = input('Insira o diretorio de execucao: ')
 	startHost(hostPort, dirPath)
+	time.sleep(30)
 	user = User()
 	chain = Chain()
 	posts = []
