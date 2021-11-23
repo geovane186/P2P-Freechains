@@ -553,6 +553,7 @@ def act6Menu3(chainName, privateKey, posts):
 	hash = input('Insira o id do post: ')
 	msg = input('Insira o motivo do dislike: ')
 	exist = False
+	posts = updatePostList(chainName, posts)
 	for post in posts:
 		if hash == post.getHash():
 			exist = True
