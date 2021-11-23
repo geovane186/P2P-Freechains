@@ -214,14 +214,15 @@ def listPosts(chainName):
 	freeExec = subprocess.run(
 		['freechains', 'chain', '#'+str(chainName), 'heads'], capture_output=True, text=True
 	)
-	print(freeExec.args)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 
 	posts = freeExec.stdout
+	print(posts)
 	res = getBlockInfo(chainName, posts)
 	print(res)
-	""" listPosts = []
+	listPosts = []
+	""" 
 	for post in posts:
 		print(post)
 		res = getBlockInfo(chainName,post)
