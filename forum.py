@@ -218,6 +218,7 @@ def listPosts(chainName):
 		print("stderr:", freeExec.stderr)
 
 	posts = freeExec.stdout
+	posts = posts.replace('\n', '')
 	print(posts)
 	res = getBlockInfo(chainName, posts)
 	print(res)
