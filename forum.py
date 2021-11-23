@@ -312,12 +312,14 @@ def updatePostList(chainName, newsPosts, posts):
 def updateBlockedPostList(chainName, blockedPosts):
 	newBlockedPosts = listBlockedPosts(chainName)
 	print(newBlockedPosts)
+	print(blockedPosts)
 	exist = False
 	for newPost in newBlockedPosts:
 		p = Post()
 		p.setHash(newPost)
 		for post in blockedPosts:
 			if p.getHash() == post.getHash():
+				print('entrou')
 				exist = True
 		if not exist:
 			blockedPosts.append(p)
