@@ -446,14 +446,18 @@ def act3Menu3(chainName, posts):
 
 	hash = input('Insira o id do post: ')
 	outputFile = input('Insira o path de saida do arquivo: ')
+	exist = False
+	print(posts)
 	for post in posts:
+		print(post.getHash())
 		if hash == post.getHash():
+			exist = True
 			print(getPost(chainName, hash, outputFile))
 			post.setReputation(getRepsPost(chainName, hash))
 			#print('\nA Reputacao do post é '+str(getRepsPost(chainName, hash)))
 			print('\nA Reputacao do post é '+str(post.getReputation()))
-		else:
-			print('Post não encontrado.')
+	if not exist:
+		print('Post não encontrado.')
 
 def act4Menu3(chainName, privateKey, posts):
 	print('\nCriar Post\n')
