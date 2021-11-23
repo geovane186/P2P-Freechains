@@ -312,7 +312,7 @@ def updateChainsList(chains):
 		i = i.replace('\n', '')
 		chain = Chain()
 		chain.setName(i)
-		chains.append(i)
+		chains.append(chain)
 
 def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKey=None, reputation=None):
 	if menuType == 1:
