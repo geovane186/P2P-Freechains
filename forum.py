@@ -164,6 +164,7 @@ def listChain():
 	freeExec = subprocess.run(
 		["freechains", '--host='+hostIp+':'+hostPort, "chains", "list"], capture_output=True, text=True
 	)
+	print(freeExec.args)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 	
