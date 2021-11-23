@@ -260,7 +260,7 @@ def getRepsPost(chainName, post):
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 
-	return freeExec.stdout
+	return freeExec.stdout.replace('\n', '')
 
 def getRepsUser(chainName, publicKey):
 	freeExec = subprocess.run(
