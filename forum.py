@@ -121,11 +121,6 @@ class Chain:
 	def setPionerKey(self, value):
 		self.pionerKey = value
 
-""" def checkKey(privateKey,publicKey):
-	if privateKey != '' and publicKey != '':
-		return True
-	return False """
-
 def startHost(hostPort, dirPath):
 	freeExec = subprocess.Popen(["freechains-host", '--port='+hostPort, 'start', dirPath], stdout=None, stderr=subprocess.STDOUT);
 	print("stdout:", freeExec.stdout)
@@ -133,8 +128,10 @@ def startHost(hostPort, dirPath):
 		print("stderr:", freeExec.stderr)
 
 def newKey(passwrd):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		["freechains", "crypto", "pubpvt", passwrd], capture_output=True, text=True
+		["freechains", '--host='+hostIp+':'+hostPort, "crypto", "pubpvt", passwrd], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -142,25 +139,30 @@ def newKey(passwrd):
 	return freeExec.stdout.split(' ')
 
 def joinChain(chainName, publicKey):
-
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		["freechains", "chains", "join", '#'+str(chainName), publicKey], capture_output=True, text=True
+		["freechains", '--host='+hostIp+':'+hostPort, "chains", "join", '#'+str(chainName), publicKey], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 	return freeExec.stdout
 
 def leaveChain(chainName):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		["freechains", "chains", "leave", "#"+str(chainName)], capture_output=True, text=True
+		["freechains", '--host='+hostIp+':'+hostPort, "chains", "leave", "#"+str(chainName)], capture_output=True, text=True
 	)
 
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 
 def listChain():
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		["freechains", "chains", "list"], capture_output=True, text=True
+		["freechains", '--host='+hostIp+':'+hostPort, "chains", "list"], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -168,8 +170,10 @@ def listChain():
 	return freeExec.stdout
 
 def newPost(chainName, privateKey, pathFile):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+str(chainName), 'post', '--sign=' + privateKey, 'file', pathFile], capture_output=True, text=True
+		['freechains', '--host='+hostIp+':'+hostPort, 'chain', "#"+str(chainName), 'post', '--sign=' + privateKey, 'file', pathFile], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -177,8 +181,10 @@ def newPost(chainName, privateKey, pathFile):
 	return freeExec.stdout
 
 def getPost(chainName, post, outputFile):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+str(chainName), 'get', 'payload', post, 'file', outputFile], capture_output=True, text=True
+		['freechains', '--host='+hostIp+':'+hostPort, 'chain', "#"+str(chainName), 'get', 'payload', post, 'file', outputFile], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -186,8 +192,10 @@ def getPost(chainName, post, outputFile):
 	return freeExec.stdout
 
 def likePost(chainName, post, privateKey, msg):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+str(chainName), 'like', post, '--sign=' + privateKey, '--why='+ msg], capture_output=True, text=True
+		['freechains', '--host='+hostIp+':'+hostPort, 'chain', "#"+str(chainName), 'like', post, '--sign=' + privateKey, '--why='+ msg], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -195,9 +203,10 @@ def likePost(chainName, post, privateKey, msg):
 	return freeExec.stdout
 
 def getBlockInfo(chainName, hash):
-	
+	global hostIp
+	global hostPort	
 	freeExec = subprocess.run(
-		["freechains", "chain", '#'+str(chainName), 'get', 'block', hash], capture_output=True, text=True
+		["freechains", '--host='+hostIp+':'+hostPort, "chain", '#'+str(chainName), 'get', 'block', hash], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -205,6 +214,8 @@ def getBlockInfo(chainName, hash):
 	return freeExec.stdout
 
 def isPost(chainName, hash):
+	global hostIp
+	global hostPort
 	res = getBlockInfo(chainName, hash)
 	obj = json.loads(res)
 	if obj['sign']:
@@ -213,8 +224,10 @@ def isPost(chainName, hash):
 	return False
 
 def listPosts(chainName):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		['freechains', 'chain', '#'+str(chainName), 'consensus'], capture_output=True, text=True
+		['freechains', '--host='+hostIp+':'+hostPort, 'chain', '#'+str(chainName), 'consensus'], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -231,8 +244,10 @@ def listPosts(chainName):
 	return listPosts
 
 def listBlockedPosts(chainName):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+str(chainName), 'heads', 'blocked'], capture_output=True, text=True
+		['freechains', '--host='+hostIp+':'+hostPort, 'chain', "#"+str(chainName), 'heads', 'blocked'], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -246,8 +261,10 @@ def listBlockedPosts(chainName):
 	return listPosts
 
 def dislikePost(chainName, post, privateKey, msg):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+str(chainName), 'dislike', post, '--sign=' + privateKey, '--why='+ msg], capture_output=True, text=True
+		['freechains', '--host='+hostIp+':'+hostPort, 'chain', "#"+str(chainName), 'dislike', post, '--sign=' + privateKey, '--why='+ msg], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -255,8 +272,10 @@ def dislikePost(chainName, post, privateKey, msg):
 	return freeExec.stdout
 
 def getRepsPost(chainName, post):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+str(chainName), 'reps', post], capture_output=True, text=True
+		['freechains', '--host='+hostIp+':'+hostPort, 'chain', "#"+str(chainName), 'reps', post], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -264,15 +283,19 @@ def getRepsPost(chainName, post):
 	return freeExec.stdout
 
 def getRepsUser(chainName, publicKey):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
-		['freechains', 'chain', "#"+str(chainName), 'reps', publicKey], capture_output=True, text=True
+		['freechains', '--host='+hostIp+':'+hostPort, 'chain', "#"+str(chainName), 'reps', publicKey], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 
 	return freeExec.stdout
 
-def sendChainHost(chainName, hostIp, hostPort, destIp, destPort):
+def sendChainHost(chainName, destIp, destPort):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
 		['freechains', '--host='+hostIp+':'+hostPort, 'peer', destIp+':'+destPort, 'send', "#"+str(chainName)], capture_output=True, text=True
 	)
@@ -281,7 +304,9 @@ def sendChainHost(chainName, hostIp, hostPort, destIp, destPort):
 
 	return freeExec.stdout
 
-def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
+def recvChainHost(chainName, origIp, origPort):
+	global hostIp
+	global hostPort
 	freeExec = subprocess.run(
 		['freechains', '--host='+hostIp+':'+hostPort, 'peer', origIp+':'+origPort, 'recv', "#"+str(chainName)], capture_output=True, text=True
 	)
@@ -291,27 +316,22 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 	return freeExec.stdout
 
 def updatePostList(chainName, newsPosts, posts):
-	print(newsPosts)
 	for newPost in newsPosts:
 		exist = False
-		print(newPost)
 		p = Post()
 		p.setHash(newPost)
 		for post in posts:
 			if p.getHash() == post.getHash():
-				print('exist')
 				exist = True
 				repPost = getRepsPost(chainName, p.getHash())
 				repPost = repPost.replace('\n', '')
 				if repPost == '-1':
 					posts.remove(post)
 		if not exist:
-			print('nexist')
 			repPost = getRepsPost(chainName, p.getHash())
 			repPost = repPost.replace('\n', '')
 			p.setReputation(repPost)
 			if repPost != '-1':
-				print('entrou')
 				posts.append(p)
 
 def updateBlockedPostList(chainName, blockedPosts):
@@ -364,7 +384,6 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('User: '+ str(publicKey)+' Reps: '+ str(reputation)+'\n')
 
 		newsPosts = listPosts(chainName)
-		print(newsPosts)
 		updatePostList(chainName, newsPosts, posts)
 
 		print('Posts:\n')
@@ -376,7 +395,6 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		
 		print('Blocked Posts:\n')
 		blockedPosts = updateBlockedPostList(chainName, blockedPosts)
-		print(blockedPosts)
 
 		if blockedPosts:
 			for post in blockedPosts:
@@ -451,34 +469,36 @@ def act5Menu2():
 def act1Menu3(chainName):
 	print('\nReceber Posts\n')
 	
-	hostIp = input('Insira o seu host ip: ')
-	hostPort = input('Insira a porta de execucao: ')
+	#hostIp = input('Insira o seu host ip: ')
+	#hostPort = input('Insira a porta de execucao: ')
 	origIp = input('Insira o host ip de origem: ')
 	origPort = input('Insira a porta de execucao de origem: ')
-	recvChainHost(chainName, hostIp, hostPort, origIp, origPort)
+	recvChainHost(chainName, origIp, origPort)
 
 def act2Menu3(chainName):
 	print('\nEnviar Posts\n')
 	
-	hostIp = input('Insira o seu host ip: ')
-	hostPort = input('Insira a porta de execucao: ')
+	#hostIp = input('Insira o seu host ip: ')
+	#hostPort = input('Insira a porta de execucao: ')
 	destIp = input('Insira o host ip de destino: ')
 	destPort = input('Insira a porta de execucao de destino: ')
-	sendChainHost(chainName, hostIp, hostPort, destIp, destPort)
+	sendChainHost(chainName, destIp, destPort)
 
 def act3Menu3(chainName, posts):
-	print('\nVisualizar Post\n')
+	print('\nAcessar Post\n')
 
 	hash = input('Insira o id do post: ')
 	outputFile = input('Insira o path de saida do arquivo: ')
-	exist = False
 	for post in posts:
+		exist = False
 		if hash == post.getHash():
 			exist = True
-			print(getPost(chainName, hash, outputFile))
-			post.setReputation(getRepsPost(chainName, hash))
+			res = getPost(chainName, hash, outputFile)
+			#print(getPost(chainName, hash, outputFile))
+			#post.setReputation(getRepsPost(chainName, hash))
 			#print('\nA Reputacao do post é '+str(getRepsPost(chainName, hash)))
-			print('\nA Reputacao do post é '+str(post.getReputation()))
+			#print('\nA Reputacao do post é '+str(post.getReputation()))
+			print('Post Baixado com sucesso.')
 	if not exist:
 		print('Post não encontrado.')
 
@@ -622,9 +642,10 @@ def postMenu():
 
 if __name__ == "__main__":
 	
-	#hostPort = input('Insira a porta de execucao: ')
-	#dirPath = input('Insira o diretorio de execucao: ')
-	#startHost(hostPort, dirPath)
+	hostIp = 'localhost'#input('Insira o seu ip de execucao: ')
+	hostPort = input('Insira a porta de execucao: ')
+	dirPath = input('Insira o diretorio de execucao: ')
+	startHost(hostPort, dirPath)
 	user = User()
 	chain = Chain()
 	posts = []
