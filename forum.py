@@ -125,7 +125,7 @@ class Chain:
 	return False """
 
 def startHost(hostPort, dirPath):
-	freeExec = subprocess.Popen(["freechains-host", '--port='+hostPort, 'start', dirPath], stdout=None, stderr=subprocess.STDOUT);
+	freeExec = subprocess.Popen(["freechains-host", '--port='+hostPort, 'start', dirPath], stdout=None, stderr=subprocess.STDOUT)
 	print("stdout:", freeExec.stdout)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -274,7 +274,7 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 	return freeExec.stdout
 
 def getBlockInfo(chainName, hash):
-	freeExec = subprocess.Popen(['freechains', 'chain', '#'+str(chainName), 'get', 'block', hash], stdout=subprocess.STDOUT, stderr=subprocess.STDOUT);
+	freeExec = subprocess.Popen(['freechains', 'chain', '#'+str(chainName), 'get', 'block', hash], stdout=subprocess.STDOUT, stderr=subprocess.STDOUT)
 	print("stdout:", freeExec.stdout)
 	""" freeExec = subprocess.run(
 		['freechains', 'chain', '#'+str(chainName), 'get', 'block', hash], capture_output=True, text=True
