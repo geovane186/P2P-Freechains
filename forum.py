@@ -274,7 +274,7 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 def getBlockInfo(chainName, hashBlock):
 	print(hashBlock)
 	freeExec = subprocess.run(
-		['freechains', 'chain', '#'+str(chainName), 'get', 'block', '0_214ED611E8E377DEB8D0F35EA15E457181418739E1158A8C9082A124CF26E6CD'], capture_output=True, text=True
+		['freechains', 'chain', '#'+str(chainName), 'get', 'block', hashBlock], capture_output=True, text=True
 	)
 	print(freeExec.args)
 	print(freeExec.stdout)
