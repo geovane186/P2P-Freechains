@@ -322,14 +322,14 @@ def updateChainsList(chains):
 
 def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKey=None, reputation=None):
 	if menuType == 1:
-		print('Bem vindo ao Forum.\n')
+		print('Bem vindo ao Forum Só Respostas.\n')
 		
 		print('Selecione uma opção no menu abaixo:\n')
 
-		print('1 - Criar novo par de Chaves.\n2 - Sair')
+		print('1 - Entrar com sua senha privada.\n2 - Sair')
 	
 	if menuType == 2:
-		print('\nForum Responde Ai.\n')
+		print('\nForum Só Respostas.\n')
 
 		print('User: '+ str(publicKey)+'\n')
 		
@@ -338,7 +338,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('1 - Listar disciplinas.\n2 - Ingressar em uma nova disciplina.\n3 - Ingressar em uma disciplina existente.\n4 - Sair da disciplina.\n5 - Voltar ao menu anterior.\n6 - Sair')
 	
 	if menuType == 3:
-		print('\nForum Responde Ai.\n')
+		print('\nForum Só Respostas.\n')
 		
 		print('User: '+ str(publicKey)+' Reps: '+ str(reputation)+'\n')
 
@@ -363,7 +363,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 	
 		print('Selecione uma opção no menu abaixo:\n')
 		
-		print('1 - Receber novos Post.\n2 - Enviar novos Post.\n3 - Visualizar post.\n4 - Criar novo post.\n5 - Curtir Post.\n6 - Descurtir Post.\n7 - Visualizar reputacao.\n8 - Voltar ao menu anterior.\n9 - Sair')
+		print('1 - Receber novos Post.\n2 - Enviar novos Post.\n3 - Visualizar post.\n4 - Criar novo post.\n5 - Curtir Post.\n6 - Descurtir Post.\n7 - Voltar ao menu anterior.\n8 - Sair')
 	
 def act1Menu1():
 	print('Criação de Chave\n')
@@ -479,36 +479,33 @@ def act5Menu3(chainName, privateKey, posts):
 	
 	hash = input('Insira o id do post: ')
 	msg = input('Insira o motivo do like: ')
+	exist = False
 	for post in posts:
 		if hash == post.getHash():
+			exist = True
 			likePost(chainName, hash, privateKey, msg)
-		else:
-			print('Post não encontrado.')
+	if not exist:
+		print('Post não encontrado.')
 
 def act6Menu3(chainName, privateKey, posts):
 	print('\nDescurtir Post\n')
 	
 	hash = input('Insira o id do post: ')
 	msg = input('Insira o motivo do dislike: ')
+	exist = False
 	for post in posts:
 		if hash == post.getHash():
+			exist = True
 			dislikePost(chainName, hash, privateKey, msg)
-		else:
-			print('Post não encontrado.')
+	if not exist:
+		print('Post não encontrado.')
 
-def act7Menu3(chainName, publicKey):
-	print('\nVisualizar Reputacao\n')
-	
-	print('A sua reputação na disciplina '+chainName+' é '+getRepsUser(chainName, publicKey))
-
-def act8Menu3():
+def act7Menu3():
 	menuType = 2
 	return menuType
 
 def startMenu():
     global user
-    #global privateKey
-    #global publicKey
     global menuType
     global exit	
     while menuType == 1:
@@ -519,19 +516,17 @@ def startMenu():
             user.setPassword(password)
             user.setPublicKey(publicKey)
             user.setPrivateKey(privateKey)
-        if "2" == selection:
+        elif "2" == selection:
             exit = True
             return
+        else:
+            print('Por favor digite uma opção valida.')
 
 def chainMenu():
     global user
     global chain
     global chains
-    #global privateKey
-    #global publicKey
     global menuType
-#   global chain
-#    global chainName
     global posts
     global exit
     while menuType == 2:
@@ -558,14 +553,13 @@ def chainMenu():
         if "6" == selection:
             exit = True
             return
+        else:
+            print('Por favor digite uma opção valida.')
 
 def postMenu():
     global user
     global chain
-#    global privateKey
-#    global publicKey
     global menuType
-#    global chainName
     global blockedPosts
     global posts
     global exit
@@ -586,20 +580,18 @@ def postMenu():
         if "6" == selection:
             act6Menu3(chain.getName(), user.getPrivateKey(), posts)
         if "7" == selection:
-            act7Menu3(chain.getName(), user.getPublicKey())
+            menuType = act7Menu3()
         if "8" == selection:
-            menuType = act8Menu3()
-        if "9" == selection:
             exit = True
             return
+        else:
+            print('Por favor digite uma opção valida.')
 
 if __name__ == "__main__":
 	
 	#hostPort = input('Insira a porta de execucao: ')
 	#dirPath = input('Insira o diretorio de execucao: ')
 	#startHost(hostPort, dirPath)
-	
-	#privateKey, publicKey, chain, chainName = '', '', '', ''
 	user = User()
 	chain = Chain()
 	posts = []
