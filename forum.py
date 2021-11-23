@@ -335,6 +335,7 @@ def updatePostList(chainName, newsPosts, posts):
 			p.setReputation(repPost)
 			if repPost != '-1':
 				posts.append(p)
+	return posts
 
 def updateBlockedPostList(chainName, blockedPosts):
 	newBlockedPosts = listBlockedPosts(chainName)
@@ -388,7 +389,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('Disciplina: '+chainName)
 
 		newsPosts = listPosts(chainName)
-		updatePostList(chainName, newsPosts, posts)
+		posts = updatePostList(chainName, newsPosts, posts)
 
 		print('Posts:\n')
 		if posts:
