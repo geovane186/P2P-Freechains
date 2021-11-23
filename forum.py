@@ -297,12 +297,14 @@ def updatePostList(chainName, newsPosts, posts):
 		p.setHash(newPost)
 		for post in posts:
 			if p.getHash() == post.getHash():
+				print('existe')
 				exist = True
 				repPost = getRepsPost(chainName, p.getHash())
 				repPost = repPost.replace('\n', '')
 				if repPost == '-1':
 					posts.remove(post)
 		if not exist:
+			print('nao existe')
 			repPost = getRepsPost(chainName, p.getHash())
 			repPost = repPost.replace('\n', '')
 			p.setReputation(repPost)
@@ -358,6 +360,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		newsPosts = listPosts(chainName)
 		print(newsPosts)
 		updatePostList(chainName, newsPosts, posts)
+		print(posts)
 
 		print('Posts:\n')
 		if posts:
