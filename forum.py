@@ -207,6 +207,7 @@ def listPosts(chainName):
 	ps = freeExec.stdout.split(' ')
 	listPosts = []
 	for i in ps:
+		print(i)
 		if isPost(chainName, i):
 			listPosts.append(i)
 
@@ -271,10 +272,9 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 
 	return freeExec.stdout
 
-def getBlockInfo(chainName, hashBlock):
-	print(hashBlock)
+def getBlockInfo(chainName, hash):
 	freeExec = subprocess.run(
-		['freechains', 'chain', '#'+str(chainName), 'get', 'block', hashBlock], capture_output=True, text=True
+		['freechains', 'chain', '#'+str(chainName), 'get', 'block', hash], capture_output=True, text=True
 	)
 	print(freeExec.args)
 	print(freeExec.stdout)
