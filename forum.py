@@ -536,8 +536,8 @@ def chainMenu():
             chains.append(chain)
         if "3" == selection:
             hash, chainName, menuType, exist, pionerKey = act3Menu2(chains)
+            chain.setName(chainName)
             if not exist:
-                chain.setName(chainName)
                 chain.setHash(hash)
                 chain.setPionerKey(pionerKey)
         if "4" == selection:
