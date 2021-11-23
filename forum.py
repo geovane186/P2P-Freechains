@@ -316,7 +316,8 @@ def recvChainHost(chainName, origIp, origPort):
 
 	return freeExec.stdout
 
-def updatePostList(chainName, newsPosts, posts):
+def updatePostList(chainName, posts):
+	newsPosts = listPosts(chainName)
 	posts=[]
 	for newPost in newsPosts:
 		exist = False
@@ -388,10 +389,8 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 
 		print('Disciplina: '+chainName)
 
-		newsPosts = listPosts(chainName)
-		posts = updatePostList(chainName, newsPosts, posts)
-
 		print('Posts:\n')
+		posts = updatePostList(chainName, posts)
 		if posts:
 			for post in posts:
 				print('File Name: '+str(post.getFileName())+' Hash: '+str(post.getHash())+' Reps: '+ str(post.getReputation())+'\n')
@@ -494,6 +493,7 @@ def act3Menu3(chainName, posts):
 	hash = input('Insira o id do post: ')
 	outputFile = input('Insira o path de saida do arquivo: ')
 	exist = False
+	posts = updatePostList(chainName, posts)
 	for post in posts:
 		print(post.getHash())
 		if hash == post.getHash():
@@ -534,6 +534,7 @@ def act5Menu3(chainName, privateKey, posts, blockedPosts):
 	hash = input('Insira o id do post: ')
 	msg = input('Insira o motivo do like: ')
 	exist = False
+	posts = updatePostList(chainName, posts)
 	for post in posts:
 		if hash == post.getHash():
 			exist = True
