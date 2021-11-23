@@ -309,6 +309,7 @@ def updateChainsList(chains):
 	res = listChain().split(' ')
 	for i in res:
 		i = i.replace('#', '')
+		i = i.replace('\n', '')
 		chain = Chain()
 		chain.setName(i)
 		chains.append(i)
