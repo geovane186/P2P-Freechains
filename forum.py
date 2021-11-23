@@ -319,9 +319,9 @@ def updateBlockedPostList(chainName, blockedPosts):
 		p.setHash(newPost)
 		for post in blockedPosts:
 			if p.getHash() == post.getHash():
-				print('entrou')
 				exist = True
 		if not exist:
+			print('entrou')
 			blockedPosts.append(p)
 
 def updateChainsList(chains):
