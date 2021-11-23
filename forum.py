@@ -306,6 +306,7 @@ def updatePostList(chainName, newsPosts, posts):
 		if not exist:
 			repPost = getRepsPost(chainName, p.getHash())
 			repPost = repPost.replace('\n', '')
+			p.setReputation(repPost)
 			if repPost != '-1':
 				posts.append(p)
 
