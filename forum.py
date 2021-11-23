@@ -484,6 +484,7 @@ def act4Menu3(chainName, privateKey, posts):
 	post.setPrivateKey(privateKey)
 	post.setReputation('0')
 	hash = (newPost(chainName, privateKey, post.getFilePath()))
+	hash = hash.replace('\n', '')
 	post.setHash(hash)
 	if hash != '':
 		posts.append(post)
