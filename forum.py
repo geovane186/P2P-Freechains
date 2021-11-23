@@ -494,6 +494,7 @@ def act3Menu3(chainName, posts):
 	outputFile = input('Insira o path de saida do arquivo: ')
 	exist = False
 	for post in posts:
+		print(post.getHash())
 		if hash == post.getHash():
 			exist = True
 			res = getPost(chainName, hash, outputFile)
