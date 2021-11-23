@@ -58,6 +58,7 @@ class User:
 class Post:
 	def __init__(self):
 		self.fileName = ''
+		self.filePath = ''
 		self.hash = ''
 		self.privateKey = ''
 		self.reputation = ''
