@@ -122,10 +122,10 @@ class Chain:
 		self.pionerKey = value
 
 def startHost(hostPort, dirPath):
-	freeExec = subprocess.Popen(["freechains-host", '--port='+hostPort, 'start', dirPath], stdout=None, stderr=subprocess.STDOUT);
-	print("stdout:", freeExec.stdout)
-	if freeExec.stderr:
-		print("stderr:", freeExec.stderr)
+	global freeStart
+	freeStart = subprocess.Popen(["freechains-host", '--port='+hostPort, 'start', dirPath], stdout=None, stderr=subprocess.STDOUT);
+	#if freeExec.stderr:
+#		print("stderr:", freeExec.stderr)
 
 def newKey(passwrd):
 	global hostIp
@@ -641,7 +641,7 @@ def postMenu():
 
 
 if __name__ == "__main__":
-	
+	freeStart = 0
 	hostIp = 'localhost'#input('Insira o seu ip de execucao: ')
 	hostPort = input('Insira a porta de execucao: ')
 	dirPath = input('Insira o diretorio de execucao: ')
@@ -661,3 +661,5 @@ if __name__ == "__main__":
 			chainMenu()
 		elif menuType == 3:
 			postMenu()
+	if exit:
+		print(type(freeStart))
