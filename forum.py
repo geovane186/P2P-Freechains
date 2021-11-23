@@ -140,7 +140,7 @@ def newKey(passwrd):
 	return freeExec.stdout.split(' ')
 
 def joinChain(chainName, publicKey):
-	publicKey = '0_214ED611E8E377DEB8D0F35EA15E457181418739E1158A8C9082A124CF26E6CD'
+
 	freeExec = subprocess.run(
 		["freechains", "chains", "join", '#'+str(chainName), publicKey], capture_output=True, text=True
 	)
@@ -274,8 +274,9 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 	return freeExec.stdout
 
 def getBlockInfo(chainName, hash):
+	hashBlock = hash
 	freeExec = subprocess.run(
-		['freechains', 'chain', '#'+str(chainName), 'get', 'block', hash, ''], capture_output=True, text=True
+		['freechains', 'chain', '#'+str(chainName), 'get', 'block', hashBlock], capture_output=True, text=True
 	)
 	print(freeExec.args)
 	if freeExec.stderr:
