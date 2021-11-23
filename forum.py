@@ -206,10 +206,7 @@ def getBlockInfo(chainName, hash):
 
 def isPost(chainName, hash):
 	res = getBlockInfo(chainName, hash)
-	print(res)
 	obj = json.loads(res)
-	print(type(obj))
-	print(obj)
 	if obj['sign']:
 		if not obj['like']:
 			return True
