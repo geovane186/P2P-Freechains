@@ -239,10 +239,10 @@ def listBlockedPosts(chainName):
 
 	ps = freeExec.stdout.split(' ')
 	listPosts = []
-	for i in ps:
-		i = i.replace('\n', '')
-		listPosts.append(i)
-
+	if ps != ['']:
+		for i in ps:
+			i = i.replace('\n', '')
+			listPosts.append(i)
 	return listPosts
 
 def dislikePost(chainName, post, privateKey, msg):
@@ -312,6 +312,7 @@ def updatePostList(chainName, newsPosts, posts):
 def updateBlockedPostList(chainName, blockedPosts):
 	newBlockedPosts = listBlockedPosts(chainName)
 	exist = False
+	blockedPosts = []
 	for newPost in newBlockedPosts:
 		p = Post()
 		p.setHash(newPost)
@@ -357,6 +358,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('User: '+ str(publicKey)+' Reps: '+ str(reputation)+'\n')
 
 		newsPosts = listPosts(chainName)
+		print(newsPosts)
 		updatePostList(chainName, newsPosts, posts)
 
 		print('Posts:\n')
