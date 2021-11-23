@@ -303,7 +303,10 @@ def updatePostList(chainName, newsPosts, posts):
 				if repPost == '-1':
 					posts.remove(p)
 		if not exist:
-			posts.append(p)
+			repPost = getRepsPost(chainName, p.getHash())
+			repPost = repPost.replace('\n', '')
+			if repPost != '-1':
+				posts.append(p)
 
 def updateBlockedPostList(chainName, blockedPosts):
 	newBlockedPosts = listBlockedPosts(chainName)
