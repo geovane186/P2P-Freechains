@@ -224,11 +224,10 @@ def listPosts(chainName):
 	for post in posts:
 		post = post.replace('\n', '')
 		if isPost(chainName, post):
-			repPost = getRepsPost(chainName, post)
-			repPost = repPost.replace('\n', '')
-			print(repPost)
-			if repPost != '-1':
-				listPosts.append(post)
+			#repPost = getRepsPost(chainName, post)
+			#repPost = repPost.replace('\n', '')
+			#if repPost != '-1':
+			listPosts.append(post)
 	return listPosts
 
 def listBlockedPosts(chainName):
@@ -299,7 +298,9 @@ def updatePostList(chainName, newsPosts, posts):
 		for post in posts:
 			if p.getHash() == post.getHash():
 				exist = True
-				if getRepsPost(chainName, p.getHash()) == '-1':
+				repPost = getRepsPost(chainName, p.getHash())
+				repPost = repPost.replace('\n', '')
+				if repPost == '-1':
 					posts.remove(p)
 		if not exist:
 			posts.append(p)
@@ -351,7 +352,6 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('User: '+ str(publicKey)+' Reps: '+ str(reputation)+'\n')
 
 		newsPosts = listPosts(chainName)
-		print(newsPosts)
 		updatePostList(chainName, newsPosts, posts)
 
 		print('Posts:\n')
