@@ -648,7 +648,7 @@ if __name__ == "__main__":
 	hostPort = input('Insira a porta de execucao: ')
 	dirPath = input('Insira o diretorio de execucao: ')
 	startHost(hostPort, dirPath)
-	time.sleep(30)
+	time.sleep(5)
 	user = User()
 	chain = Chain()
 	posts = []
@@ -666,4 +666,3 @@ if __name__ == "__main__":
 			postMenu()
 	if exit:
 		freeStart.terminate()
-		#print(type(freeStart))
