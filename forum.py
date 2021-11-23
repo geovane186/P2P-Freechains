@@ -390,15 +390,14 @@ def act3Menu2(chains):
 	print('\nIngressar em Disciplina Existente\n')
 	exist = False
 	chainName = input('Insira o nome da Disciplina: ')
-	print(chains)
 	for c in chains:
 		if chainName == c.getName():
 			print('entrou')
 			exist = True
 			pionerKey = c.getPionerKey()
-		else:
-			pionerKey = input('Insira a pioner Key da Disciplina: ')
-			chain = joinChain(chainName, pionerKey)
+	if not exist:
+		pionerKey = input('Insira a pioner Key da Disciplina: ')
+		chain = joinChain(chainName, pionerKey)
 	menuType = 3
 	
 	return chain, chainName, menuType, exist, pionerKey
@@ -595,7 +594,6 @@ if __name__ == "__main__":
 	blockedPosts = []
 	chains = []
 	updateChainsList(chains)
-	print(chains)
 	exit = False
 	menuType = 1
 	while exit == False:
