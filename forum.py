@@ -218,15 +218,16 @@ def listPosts(chainName):
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 
-	posts = freeExec.stdout.split(' ')
-
-	listPosts = []
+	posts = freeExec.stdout
+	res = getBlockInfo(chainName, posts)
+	print(res)
+	""" listPosts = []
 	for post in posts:
 		print(post)
 		res = getBlockInfo(chainName,post)
 		print(res)
 		#if isPost(chainName, i):
-	#		listPosts.append(i)
+	#		listPosts.append(i) """
 	return listPosts
 
 def listBlockedPosts(chainName):
