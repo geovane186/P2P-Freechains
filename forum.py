@@ -160,6 +160,7 @@ def listChain():
 	freeExec = subprocess.run(
 		["freechains", "chains", "list"], capture_output=True, text=True
 	)
+	print(freeExec.args)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 	
@@ -193,7 +194,7 @@ def likePost(chainName, post, privateKey, msg):
 	return freeExec.stdout
 
 def isPost(chainName, hash):
-	res = getBlockInfo(chainName,hash)
+	res = getBlockInfo(chainName, hash)
 	print(res)
 
 def listPosts(chainName):
@@ -271,7 +272,7 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 	return freeExec.stdout
 
 def getBlockInfo(chainName, hashBlock):
-	print(chainName)
+	print(hashBlock)
 	freeExec = subprocess.run(
 		['freechains', 'chain', "'#"+str(chainName)+"'", 'get', 'block', hashBlock], capture_output=True, text=True
 	)
