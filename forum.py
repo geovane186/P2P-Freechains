@@ -324,7 +324,7 @@ def updateBlockedPostList(chainName, blockedPosts):
 def updateChainsList(chains):
 	res = listChain().split(' ')
 	print(res)
-	if res == ' ':
+	if res == '\n':
 		print('vzio')
 	for i in res:
 		i = i.replace('#', '')
