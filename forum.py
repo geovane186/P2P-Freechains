@@ -302,6 +302,7 @@ def updatePostList(chainName, newsPosts, posts):
 				repPost = repPost.replace('\n', '')
 				if repPost == '-1':
 					posts.remove(post)
+					print(posts)
 		if not exist:
 			repPost = getRepsPost(chainName, p.getHash())
 			repPost = repPost.replace('\n', '')
@@ -360,7 +361,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('Posts:\n')
 		if posts:
 			for post in posts:
-				print('File Name: '+str(post.getFileName())+' Hash: '+str(post.getHash())+'\n')
+				print('File Name: '+str(post.getFileName())+' Hash: '+str(post.getHash())+' Reps: '+ str(post.getReputation())+'\n')
 		else:
 			print('Sem posts na Disciplina\n')
 		
