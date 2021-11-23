@@ -238,6 +238,7 @@ def listBlockedPosts(chainName):
 	ps = freeExec.stdout.split(' ')
 	listPosts = []
 	for i in ps:
+		i = i.replace('\n', '')
 		listPosts.append(i)
 
 	return listPosts
@@ -288,23 +289,27 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 	return freeExec.stdout
 
 def updatePostList(newsPosts, posts):
+	exist = False
 	for newPost in newsPosts:
 		p = Post()
 		p.setHash(newPost)
 		for post in posts:
 			if p.getHash() == post.getHash():
-				continue
-		posts.append(p)
+				exist = True
+		if not exist:
+			posts.append(p)
 
 def updateBlockedPostList(chainName, blockedPosts):
 	newBlockedPosts = listBlockedPosts(chainName)
-	for post in newBlockedPosts:
+	exist = False
+	for newPost in newBlockedPosts:
 		p = Post()
-		p.setHash(post)
+		p.setHash(newPost)
 		for post in blockedPosts:
 			if p.getHash() == post.getHash():
-				continue
-		blockedPosts.append(post)
+				exist = True
+		if not exist:
+			blockedPosts.append(p)
 
 def updateChainsList(chains):
 	res = listChain().split(' ')
