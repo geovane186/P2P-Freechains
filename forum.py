@@ -123,7 +123,7 @@ class Chain:
 
 def startHost(hostPort, dirPath):
 	global freeStart
-	freeStart = subprocess.Popen(["freechains-host", '--port='+hostPort, 'start', dirPath], stdout=None, stderr=subprocess.STDOUT);
+	freeStart = subprocess.Popen(["freechains-host", '--port='+hostPort, 'start', dirPath], stdout=None, stderr=None);
 	#if freeExec.stderr:
 #		print("stderr:", freeExec.stderr)
 
@@ -662,4 +662,5 @@ if __name__ == "__main__":
 		elif menuType == 3:
 			postMenu()
 	if exit:
-		print(type(freeStart))
+		freeStart.terminate()
+		#print(type(freeStart))
