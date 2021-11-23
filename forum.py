@@ -508,7 +508,7 @@ def act5Menu3(chainName, privateKey, posts, blockedPosts):
 		if hash == post.getHash():
 			exist = True
 			likePost(chainName, hash, privateKey, msg)
-	print(blockedPosts)
+	blockedPosts = updateBlockedPostList(chainName, blockedPosts)
 	for blockpost in blockedPosts:
 		if hash == blockpost.getHash():
 			exist = True
