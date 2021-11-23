@@ -297,14 +297,12 @@ def updatePostList(chainName, newsPosts, posts):
 		p.setHash(newPost)
 		for post in posts:
 			if p.getHash() == post.getHash():
-				print('existe')
 				exist = True
 				repPost = getRepsPost(chainName, p.getHash())
 				repPost = repPost.replace('\n', '')
 				if repPost == '-1':
 					posts.remove(post)
 		if not exist:
-			print('nao existe')
 			repPost = getRepsPost(chainName, p.getHash())
 			repPost = repPost.replace('\n', '')
 			p.setReputation(repPost)
@@ -358,9 +356,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('User: '+ str(publicKey)+' Reps: '+ str(reputation)+'\n')
 
 		newsPosts = listPosts(chainName)
-		print(newsPosts)
 		updatePostList(chainName, newsPosts, posts)
-		print(posts)
 
 		print('Posts:\n')
 		if posts:
@@ -416,7 +412,6 @@ def act3Menu2(chains):
 	chain = ''
 	for c in chains:
 		if chainName == c.getName():
-			print('entrou')
 			exist = True
 			pionerKey = c.getPionerKey()
 	if not exist:
