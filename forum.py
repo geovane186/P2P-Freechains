@@ -292,8 +292,8 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 
 def updatePostList(chainName, newsPosts, posts):
 	print(newsPosts)
-	exist = False
 	for newPost in newsPosts:
+		exist = False
 		print(newPost)
 		p = Post()
 		p.setHash(newPost)
@@ -316,9 +316,9 @@ def updatePostList(chainName, newsPosts, posts):
 
 def updateBlockedPostList(chainName, blockedPosts):
 	newBlockedPosts = listBlockedPosts(chainName)
-	exist = False
 	blockedPosts = []
 	for newPost in newBlockedPosts:
+		exist = False
 		p = Post()
 		p.setHash(newPost)
 		for post in blockedPosts:
