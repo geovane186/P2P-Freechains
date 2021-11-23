@@ -320,8 +320,8 @@ def updateBlockedPostList(chainName, blockedPosts):
 			if p.getHash() == post.getHash():
 				exist = True
 		if not exist:
-			print('entrou')
 			blockedPosts.append(p)
+	print(blockedPosts)
 
 def updateChainsList(chains):
 	res = listChain().split(' ')
@@ -371,6 +371,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		
 		print('Blocked Posts:\n')
 		updateBlockedPostList(chainName, blockedPosts)
+		print(blockedPosts)
 
 		if blockedPosts:
 			for post in blockedPosts:
