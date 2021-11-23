@@ -327,7 +327,6 @@ def updateChainsList(chains):
 		for i in res:
 			i = i.replace('#', '')
 			i = i.replace('\n', '')
-			print(i)
 			chain = Chain()
 			chain.setName(i)
 			chains.append(chain)
@@ -474,7 +473,7 @@ def act3Menu3(chainName, posts):
 	if not exist:
 		print('Post não encontrado.')
 
-def act4Menu3(chainName, privateKey, posts):
+def act4Menu3(chainName, privateKey, posts, repUser):
 	print('\nCriar Post\n')
 
 	post = Post()
@@ -487,7 +486,12 @@ def act4Menu3(chainName, privateKey, posts):
 	hash = hash.replace('\n', '')
 	post.setHash(hash)
 	if hash != '':
-		posts.append(post)
+		repUser = repUser.replace('\n', '')
+		if int(repUser) > 0:
+			posts.append(post)
+			print('Post adicionado com sucesso')
+		else:
+			print('Post bloqueado por falta de reputação')
 
 
 def act5Menu3(chainName, privateKey, posts):
@@ -590,7 +594,7 @@ def postMenu():
         if "3" == selection:
             act3Menu3(chain.getName(), posts)
         if "4" == selection:
-            act4Menu3(chain.getName(), user.getPrivateKey(), posts)
+            act4Menu3(chain.getName(), user.getPrivateKey(), posts, user.getReputation())
         if "5" == selection:
             act5Menu3(chain.getName(), user.getPrivateKey(), posts)
         if "6" == selection:
