@@ -20,6 +20,7 @@ print("stderr:", p.stderr) """
 from os import putenv
 import subprocess
 import sys
+import json 
 
 class User:
 	def __init__(self):
@@ -198,7 +199,6 @@ def getBlockInfo(chainName, hash):
 	freeExec = subprocess.run(
 		["freechains", "chain", '#'+str(chainName), 'get', 'block', hash], capture_output=True, text=True
 	)
-	print(freeExec.args)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 
@@ -207,6 +207,8 @@ def getBlockInfo(chainName, hash):
 def isPost(chainName, hash):
 	res = getBlockInfo(chainName, hash)
 	print(res)
+	obj = json.loads(res)
+	print(type(res))
 	return False
 
 def listPosts(chainName):
