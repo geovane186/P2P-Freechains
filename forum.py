@@ -208,7 +208,7 @@ def isPost(chainName, hash):
 	res = getBlockInfo(chainName, hash)
 	print(res)
 	obj = json.loads(res)
-	print(type(res))
+	print(type(obj))
 	return False
 
 def listPosts(chainName):
