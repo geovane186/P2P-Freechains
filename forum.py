@@ -209,6 +209,9 @@ def isPost(chainName, hash):
 	print(res)
 	obj = json.loads(res)
 	print(type(obj))
+	print(obj)
+	if obj["sign"] != 'Null':
+		print('entrou')
 	return False
 
 def listPosts(chainName):
