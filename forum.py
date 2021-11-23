@@ -297,16 +297,19 @@ def updatePostList(chainName, newsPosts, posts):
 		p.setHash(newPost)
 		for post in posts:
 			if p.getHash() == post.getHash():
+				print('exist')
 				exist = True
 				repPost = getRepsPost(chainName, p.getHash())
 				repPost = repPost.replace('\n', '')
 				if repPost == '-1':
 					posts.remove(post)
 		if not exist:
+			print('nexist')
 			repPost = getRepsPost(chainName, p.getHash())
 			repPost = repPost.replace('\n', '')
 			p.setReputation(repPost)
 			if repPost != '-1':
+				print('entrou')
 				posts.append(p)
 
 def updateBlockedPostList(chainName, blockedPosts):
