@@ -205,7 +205,7 @@ def getBlockInfo(chainName, hash):
 	return freeExec.stdout
 
 def isPost(chainName, hash):
-	#hash = '0_214ED611E8E377DEB8D0F35EA15E457181418739E1158A8C9082A124CF26E6CD'
+	hash = '0_214ED611E8E377DEB8D0F35EA15E457181418739E1158A8C9082A124CF26E6CD'
 	res = getBlockInfo(chainName, hash)
 	print(res)
 	return False
@@ -218,13 +218,15 @@ def listPosts(chainName):
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 
-	ps = freeExec.stdout.split(' ')
-	listPosts = []
-	for i in ps:
-		print(i)
-		if isPost(chainName, i):
-			listPosts.append(i)
+	posts = freeExec.stdout.split(' ')
 
+	listPosts = []
+	for post in posts:
+		print(post)
+		res = getBlockInfo(chainName,post)
+		print(res)
+		#if isPost(chainName, i):
+	#		listPosts.append(i)
 	return listPosts
 
 def listBlockedPosts(chainName):
