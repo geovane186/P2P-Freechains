@@ -224,6 +224,7 @@ def listPosts(chainName):
 	for post in posts:
 		post = post.replace('\n', '')
 		if isPost(chainName, post):
+			print(getRepsPost(chainName, post))
 			if getRepsPost(chainName, post) != '-1':
 				listPosts.append(post)
 	return listPosts
