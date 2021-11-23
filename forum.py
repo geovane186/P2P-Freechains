@@ -422,6 +422,7 @@ def act3Menu2(chains):
 	return chain, chainName, menuType, exist, pionerKey
 
 def act4Menu2(chains):
+	print(chains)
 	if chains != []:
 		print('\nSair da Disciplina\n')
 		
