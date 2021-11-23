@@ -291,8 +291,10 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 	return freeExec.stdout
 
 def updatePostList(chainName, newsPosts, posts):
+	print(newsPosts)
 	exist = False
 	for newPost in newsPosts:
+		print(newPost)
 		p = Post()
 		p.setHash(newPost)
 		for post in posts:
