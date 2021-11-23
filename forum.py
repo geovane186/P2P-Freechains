@@ -224,8 +224,10 @@ def listPosts(chainName):
 	for post in posts:
 		post = post.replace('\n', '')
 		if isPost(chainName, post):
-			print(getRepsPost(chainName, post))
-			if getRepsPost(chainName, post) != '-1':
+			repPost = getRepsPost(chainName, post)
+			repPost = repPost.replace('\n', '')
+			print(repPost)
+			if repPost != '-1':
 				listPosts.append(post)
 	return listPosts
 
@@ -260,7 +262,7 @@ def getRepsPost(chainName, post):
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 
-	return freeExec.stdout.replace('\n', '')
+	return freeExec.stdout
 
 def getRepsUser(chainName, publicKey):
 	freeExec = subprocess.run(
