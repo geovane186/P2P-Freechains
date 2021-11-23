@@ -398,7 +398,7 @@ def act3Menu2(chains):
 			pionerKey = c.getPionerKey()
 		else:
 			pionerKey = input('Insira a pioner Key da Disciplina: ')
-	chain = joinChain(chainName, pionerKey)
+			chain = joinChain(chainName, pionerKey)
 	menuType = 3
 	
 	return chain, chainName, menuType, exist, pionerKey
