@@ -165,7 +165,6 @@ def listChain():
 	freeExec = subprocess.run(
 		["freechains", '--host='+hostIp+':'+hostPort, "chains", "list"], capture_output=True, text=True
 	)
-	print(freeExec.args)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 	
@@ -409,7 +408,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('1 - Receber novos Post.\n2 - Enviar novos Post.\n3 - Visualizar post.\n4 - Criar novo post.\n5 - Curtir Post.\n6 - Descurtir Post.\n7 - Voltar ao menu anterior.\n8 - Sair')
 	
 def act1Menu1():
-	print('Criação de Chave\n')
+	print('Gerar Par de Chaves\n')
 
 	password = input('Insira sua senha segura: ')
 	publicKey,privateKey = newKey(password)
@@ -449,7 +448,6 @@ def act3Menu2(chains):
 		pionerKey = input('Insira a pioner Key da Disciplina: ')
 		chain = joinChain(chainName, pionerKey)
 	menuType = 3
-	
 	return chain, chainName, menuType, exist, pionerKey
 
 def act4Menu2(chains):
@@ -602,6 +600,7 @@ def chainMenu():
             if not exist:
                 chain.setHash(hash)
                 chain.setPionerKey(pionerKey)
+                chains.append(chain)
         if "4" == selection:
             act4Menu2(chains)
         if "5" == selection:
@@ -648,6 +647,7 @@ if __name__ == "__main__":
 	hostPort = input('Insira a porta de execucao: ')
 	dirPath = input('Insira o diretorio de execucao: ')
 	startHost(hostPort, dirPath)
+	print('Esperando o servidor iniciar...')
 	time.sleep(5)
 	user = User()
 	chain = Chain()
