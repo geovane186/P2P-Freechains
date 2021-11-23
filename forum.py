@@ -123,9 +123,9 @@ class Chain:
 
 def startHost(hostPort, dirPath):
 	global freeStart
-	freeStart = subprocess.Popen(["freechains-host", '--port='+hostPort, 'start', dirPath], stdout=None, stderr=None);
-	#if freeExec.stderr:
-#		print("stderr:", freeExec.stderr)
+	freeStart = subprocess.Popen(["freechains-host", '--port='+hostPort, 'start', dirPath], stdout=subprocess.PIPE, stderr=subprocess.STDOUT);
+	if freeStart.stderr:
+		print("stderr:", freeStart.stderr)
 
 def newKey(passwrd):
 	global hostIp
@@ -651,7 +651,7 @@ if __name__ == "__main__":
 	posts = []
 	blockedPosts = []
 	chains = []
-	#updateChainsList(chains)
+	updateChainsList(chains)
 	exit = False
 	menuType = 1
 	while exit == False:
