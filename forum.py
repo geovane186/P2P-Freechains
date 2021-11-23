@@ -321,7 +321,7 @@ def updateBlockedPostList(chainName, blockedPosts):
 				exist = True
 		if not exist:
 			blockedPosts.append(p)
-	print(blockedPosts)
+	return blockedPosts
 
 def updateChainsList(chains):
 	res = listChain().split(' ')
@@ -370,7 +370,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 			print('Sem posts na Disciplina\n')
 		
 		print('Blocked Posts:\n')
-		updateBlockedPostList(chainName, blockedPosts)
+		blockedPosts = updateBlockedPostList(chainName, blockedPosts)
 		print(blockedPosts)
 
 		if blockedPosts:
