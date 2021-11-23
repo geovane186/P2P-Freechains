@@ -368,7 +368,6 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		
 		print('Blocked Posts:\n')
 		updateBlockedPostList(chainName, blockedPosts)
-		print(blockedPosts)
 
 		if blockedPosts:
 			for post in blockedPosts:
