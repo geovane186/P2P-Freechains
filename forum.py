@@ -422,8 +422,7 @@ def act3Menu2(chains):
 	return chain, chainName, menuType, exist, pionerKey
 
 def act4Menu2(chains):
-	#chains = listChain()
-	if chains != '':
+	if chains != []:
 		print('\nSair da Disciplina\n')
 		
 		chainName = input('Insira o nome da disciplina: ')
