@@ -651,7 +651,7 @@ if __name__ == "__main__":
 	posts = []
 	blockedPosts = []
 	chains = []
-	updateChainsList(chains)
+	#updateChainsList(chains)
 	exit = False
 	menuType = 1
 	while exit == False:
