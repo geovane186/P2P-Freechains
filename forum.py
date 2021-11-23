@@ -494,7 +494,7 @@ def act4Menu3(chainName, privateKey, posts, repUser):
 			print('Post bloqueado por falta de reputação')
 
 
-def act5Menu3(chainName, privateKey, posts):
+def act5Menu3(chainName, privateKey, posts, blockedPosts):
 	print('\nCurtir Post\n')
 	
 	hash = input('Insira o id do post: ')
@@ -502,6 +502,10 @@ def act5Menu3(chainName, privateKey, posts):
 	exist = False
 	for post in posts:
 		if hash == post.getHash():
+			exist = True
+			likePost(chainName, hash, privateKey, msg)
+	for blockpost in blockedPosts:
+		if hash == blockpost.getHash():
 			exist = True
 			likePost(chainName, hash, privateKey, msg)
 	if not exist:
@@ -594,9 +598,9 @@ def postMenu():
         if "3" == selection:
             act3Menu3(chain.getName(), posts)
         if "4" == selection:
-            act4Menu3(chain.getName(), user.getPrivateKey(), posts, user.getReputation())
+            act4Menu3(chain.getName(), user.getPrivateKey(), posts, repUser=user.getReputation())
         if "5" == selection:
-            act5Menu3(chain.getName(), user.getPrivateKey(), posts)
+            act5Menu3(chain.getName(), user.getPrivateKey(), posts, blockedPosts)
         if "6" == selection:
             act6Menu3(chain.getName(), user.getPrivateKey(), posts)
         if "7" == selection:
