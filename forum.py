@@ -377,15 +377,20 @@ def act2Menu2(publicKey):
 	
 	return chain, chainName, menuType
 
-def act3Menu2():
+def act3Menu2(chains):
 	print('\nIngressar em Disciplina Existente\n')
-	
+	exist = False
 	chainName = input('Insira o nome da Disciplina: ')
-	pionerKey = input('Insira a pioner Key da Disciplina: ')
+	for c in chains:
+		if chainName == c.getName():
+			exist = True
+			pionerKey = c.getPionerKey()
+		else:
+			pionerKey = input('Insira a pioner Key da Disciplina: ')
 	chain = joinChain(chainName, pionerKey)
 	menuType = 3
 	
-	return chain, chainName, menuType
+	return chain, chainName, menuType, exist, pionerKey
 
 def act4Menu2():
 	chains = listChain()
@@ -499,6 +504,7 @@ def startMenu():
 def chainMenu():
     global user
     global chain
+    global chains
     #global privateKey
     #global publicKey
     global menuType
@@ -516,10 +522,13 @@ def chainMenu():
             chain.setName(chainName)
             chain.setHash(hash)
             chain.setPionerKey(user.getPublicKey())
+            chains.append(chain)
         if "3" == selection:
-            hash, chainName, menuType = act3Menu2()
-            chain.setName(chainName)
-            chain.setHash(hash)
+            hash, chainName, menuType, exist, pionerKey = act3Menu2(chains)
+            if not exist:
+                chain.setName(chainName)
+                chain.setHash(hash)
+                chain.setPionerKey(pionerKey)
         if "4" == selection:
             act4Menu2()
         if "5" == selection:
@@ -573,6 +582,7 @@ if __name__ == "__main__":
 	chain = Chain()
 	posts = []
 	blockedPosts = []
+	chains = []
 	exit = False
 	menuType = 1
 	while exit == False:
