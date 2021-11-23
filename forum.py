@@ -421,13 +421,17 @@ def act3Menu2(chains):
 	
 	return chain, chainName, menuType, exist, pionerKey
 
-def act4Menu2():
-	chains = listChain()
+def act4Menu2(chains):
+	#chains = listChain()
 	if chains != '':
 		print('\nSair da Disciplina\n')
 		
 		chainName = input('Insira o nome da disciplina: ')
 		leaveChain(chainName)
+		for c in chains:
+			if chainName == c.getName:
+				chains.remove(c)
+				print('Disciplina '+chainName+' Removida.')
 	else:
 		print('Não existem disciplinas disponiveis')
 
@@ -558,7 +562,7 @@ def chainMenu():
                 chain.setHash(hash)
                 chain.setPionerKey(pionerKey)
         if "4" == selection:
-            act4Menu2()
+            act4Menu2(chains)
         if "5" == selection:
             menuType = act5Menu2()
         if "6" == selection:
