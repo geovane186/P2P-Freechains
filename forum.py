@@ -343,7 +343,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('Posts:\n')
 		if posts:
 			for post in posts:
-				print('File Name: '+post.getFileName()+' Hash: '+post.getHash()+'\n')
+				print('File Name: '+str(post.getFileName())+' Hash: '+str(post.getHash())+'\n')
 		else:
 			print('Sem posts na Disciplina\n')
 		
@@ -352,7 +352,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 
 		if blockedPosts:
 			for post in blockedPosts:
-				print('File Name: '+post.getFileName()+' Hash: '+post.getHash()+'\n')
+				print('File Name: '+str(post.getFileName())+' Hash: '+str(post.getHash())+'\n')
 		else:
 			print('Sem posts bloqueados na Disciplina\n')
 	
@@ -456,12 +456,13 @@ def act4Menu3(chainName, privateKey, posts):
 	post = Post()
 
 	post.setFileName(input('Insira o nome do arquivo: '))
-	post.setFilePath = input('Insira o path do arquivo: ')
+	post.setFilePath(input('Insira o path do arquivo: '))
 	post.setPrivateKey(privateKey)
 	post.setReputation('0')
-	
-	post.setHash((newPost(chainName, privateKey, post.getFilePath()), post.getFileName(), post.getPrivateKey()))
-	posts.append(post)
+	hash = (newPost(chainName, privateKey, post.getFilePath()))
+	post.setHash(hash)
+	if hash != '':
+		posts.append(post)
 
 
 def act5Menu3(chainName, privateKey, posts):
