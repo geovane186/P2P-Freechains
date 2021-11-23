@@ -305,6 +305,14 @@ def updateBlockedPostList(chainName, blockedPosts):
 				continue
 		blockedPosts.append(post)
 
+def updateChainsList(chains):
+	res = listChain().split(' ')
+	for i in res:
+		i = i.replace('#', '')
+		chain = Chain()
+		chain.setName(i)
+		chains.append(i)
+
 def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKey=None, reputation=None):
 	if menuType == 1:
 		print('Bem vindo ao Forum.\n')
@@ -585,6 +593,8 @@ if __name__ == "__main__":
 	posts = []
 	blockedPosts = []
 	chains = []
+	updateChainsList(chains)
+	print(chains)
 	exit = False
 	menuType = 1
 	while exit == False:
