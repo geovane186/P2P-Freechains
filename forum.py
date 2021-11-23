@@ -387,6 +387,7 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('Disciplina: '+chainName)
 
 		newsPosts = listPosts(chainName)
+		posts=[]
 		updatePostList(chainName, newsPosts, posts)
 
 		print('Posts:\n')
