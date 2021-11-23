@@ -327,6 +327,7 @@ def updateChainsList(chains):
 	for i in res:
 		i = i.replace('#', '')
 		i = i.replace('\n', '')
+		print(i)
 		chain = Chain()
 		chain.setName(i)
 		chains.append(chain)
