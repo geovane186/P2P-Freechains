@@ -301,7 +301,7 @@ def updatePostList(chainName, newsPosts, posts):
 				repPost = getRepsPost(chainName, p.getHash())
 				repPost = repPost.replace('\n', '')
 				if repPost == '-1':
-					posts.remove(p)
+					posts.remove(post)
 		if not exist:
 			repPost = getRepsPost(chainName, p.getHash())
 			repPost = repPost.replace('\n', '')
