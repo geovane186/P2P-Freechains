@@ -320,12 +320,12 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		
 		print('Selecione uma opção no menu abaixo:\n')
 		
-		print('1 - Listar disciplinas.\n2 - Ingressar em uma nova disciplina.\n3 - Ingressar em uma disciplina existente.\n3 - Sair da disciplina.\n4 - Voltar ao menu anterior.\n5 - Sair')
+		print('1 - Listar disciplinas.\n2 - Ingressar em uma nova disciplina.\n3 - Ingressar em uma disciplina existente.\n4 - Sair da disciplina.\n5 - Voltar ao menu anterior.\n6 - Sair')
 	
 	if menuType == 3:
 		print('\nForum Responde Ai.\n')
 		
-		print('User: '+ str(publicKey)+'Reps: '+ str(reputation)+'\n')
+		print('User: '+ str(publicKey)+' Reps: '+ str(reputation)+'\n')
 
 		newsPosts = listPosts(chainName)
 		updatePostList(newsPosts, posts)
@@ -382,7 +382,9 @@ def act3Menu2(chains):
 	exist = False
 	chainName = input('Insira o nome da Disciplina: ')
 	for c in chains:
+		print(c)
 		if chainName == c.getName():
+			print('entrou')
 			exist = True
 			pionerKey = c.getPionerKey()
 		else:
