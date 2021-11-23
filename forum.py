@@ -552,7 +552,7 @@ def chainMenu():
         selection = input("Sua escolha: ")
         print('--------------------------------------------------------------------------------------')
         if "1" == selection:
-            act1Menu2()
+            act1Menu2(chains)
         if "2" == selection:
             hash, chainName, menuType = act2Menu2(user.getPublicKey())
             chain.setName(chainName)
