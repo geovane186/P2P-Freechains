@@ -322,14 +322,16 @@ def updateChainsList(chains):
 
 def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKey=None, reputation=None):
 	if menuType == 1:
-		print('Bem vindo ao Forum Só Respostas.\n')
+		print('--------------------------------------------------------------------------------------\n')
+		print('                    Bem vindo ao Forum Só Respostas.\n')
 		
 		print('Selecione uma opção no menu abaixo:\n')
 
 		print('1 - Entrar com sua senha privada.\n2 - Sair')
 	
 	if menuType == 2:
-		print('\nForum Só Respostas.\n')
+		print('--------------------------------------------------------------------------------------\n')
+		print('\n                    Forum Só Respostas.\n')
 
 		print('User: '+ str(publicKey)+'\n')
 		
@@ -338,7 +340,8 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('1 - Listar disciplinas.\n2 - Ingressar em uma nova disciplina.\n3 - Ingressar em uma disciplina existente.\n4 - Sair da disciplina.\n5 - Voltar ao menu anterior.\n6 - Sair')
 	
 	if menuType == 3:
-		print('\nForum Só Respostas.\n')
+		print('--------------------------------------------------------------------------------------\n')
+		print('\n                    Forum Só Respostas.\n')
 		
 		print('User: '+ str(publicKey)+' Reps: '+ str(reputation)+'\n')
 
@@ -511,12 +514,13 @@ def startMenu():
     while menuType == 1:
         print_menu(menuType)
         selection = input("Sua escolha: ")
+        print('--------------------------------------------------------------------------------------\n')
         if "1" == selection:
             password, privateKey, publicKey, menuType = act1Menu1()
             user.setPassword(password)
             user.setPublicKey(publicKey)
             user.setPrivateKey(privateKey)
-        elif "2" == selection:
+        if "2" == selection:
             exit = True
             return
         else:
@@ -532,6 +536,7 @@ def chainMenu():
     while menuType == 2:
         print_menu(menuType, publicKey=user.getPublicKey())
         selection = input("Sua escolha: ")
+        print('--------------------------------------------------------------------------------------\n')
         if "1" == selection:
             act1Menu2()
         if "2" == selection:
@@ -567,6 +572,7 @@ def postMenu():
         user.setReputation(getRepsUser(chainName=chain.getName(), publicKey=user.getPublicKey()))
         print_menu(menuType, posts, chain.getName(), blockedPosts, publicKey=user.getPublicKey(), reputation=user.getReputation())
         selection = input("Sua escolha: ")
+        print('--------------------------------------------------------------------------------------\n')
         if "1" == selection:
             act1Menu3(chain.getName())
         if "2" == selection:
