@@ -145,7 +145,6 @@ def joinChain(chainName, publicKey):
 	freeExec = subprocess.run(
 		["freechains", "chains", "join", '#'+str(chainName), publicKey], capture_output=True, text=True
 	)
-	print(freeExec.args)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 	return freeExec.stdout
@@ -306,7 +305,7 @@ def updateBlockedPostList(chainName, blockedPosts):
 				continue
 		blockedPosts.append(post)
 
-def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKey=None):
+def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKey=None, reputation=None):
 	if menuType == 1:
 		print('Bem vindo ao Forum.\n')
 		
@@ -321,12 +320,12 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		
 		print('Selecione uma opção no menu abaixo:\n')
 		
-		print('1 - Listar disciplinas.\n2 - Ingressar em uma nova/existente disciplina.\n3 - Sair da disciplina\n4 - Voltar ao menu anterior.\n5 - Sair')
+		print('1 - Listar disciplinas.\n2 - Ingressar em uma nova disciplina.\n3 - Ingressar em uma disciplina existente.\n3 - Sair da disciplina.\n4 - Voltar ao menu anterior.\n5 - Sair')
 	
 	if menuType == 3:
 		print('\nForum Responde Ai.\n')
-
-		print('User: '+ str(publicKey)+'\n')
+		
+		print('User: '+ str(publicKey)+'Reps: '+ str(reputation)+'\n')
 
 		newsPosts = listPosts(chainName)
 		updatePostList(newsPosts, posts)
@@ -370,16 +369,25 @@ def act1Menu2():
 		print('Não existem Disciplinas disponiveis')
 
 def act2Menu2(publicKey):
-	print('\nIngressar em Disciplina\n')
+	print('\nIngressar em nova Disciplina\n')
 	
 	chainName = input('Insira o nome da Disciplina: ')
 	chain = joinChain(chainName, publicKey)
-
 	menuType = 3
 	
 	return chain, chainName, menuType
 
 def act3Menu2():
+	print('\nIngressar em Disciplina Existente\n')
+	
+	chainName = input('Insira o nome da Disciplina: ')
+	pionerKey = input('Insira a pioner Key da Disciplina: ')
+	chain = joinChain(chainName, pionerKey)
+	menuType = 3
+	
+	return chain, chainName, menuType
+
+def act4Menu2():
 	chains = listChain()
 	if chains != '':
 		print('\nSair da Disciplina\n')
@@ -389,7 +397,7 @@ def act3Menu2():
 	else:
 		print('Não existem disciplinas disponiveis')
 
-def act4Menu2():
+def act5Menu2():
 	menuType = 1
 	return menuType
 
@@ -509,10 +517,14 @@ def chainMenu():
             chain.setHash(hash)
             chain.setPionerKey(user.getPublicKey())
         if "3" == selection:
-            act3Menu2()
+            hash, chainName, menuType = act3Menu2()
+            chain.setName(chainName)
+            chain.setHash(hash)
         if "4" == selection:
-            menuType = act4Menu2()
+            act4Menu2()
         if "5" == selection:
+            menuType = act5Menu2()
+        if "6" == selection:
             exit = True
             return
 
@@ -527,7 +539,8 @@ def postMenu():
     global posts
     global exit
     while menuType == 3:
-        print_menu(menuType, posts, chain.getName(), blockedPosts, publicKey=user.getPublicKey())
+        user.setReputation(getRepsUser(chainName=chain.getName(), publicKey=user.getPublicKey()))
+        print_menu(menuType, posts, chain.getName(), blockedPosts, publicKey=user.getPublicKey(), reputation=user.getReputation())
         selection = input("Sua escolha: ")
         if "1" == selection:
             act1Menu3(chain.getName())
