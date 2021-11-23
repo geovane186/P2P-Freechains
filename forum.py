@@ -193,8 +193,19 @@ def likePost(chainName, post, privateKey, msg):
 
 	return freeExec.stdout
 
+def getBlockInfo(chainName, hash):
+	
+	freeExec = subprocess.run(
+		["freechains", "chain", '#'+str(chainName), 'get', 'block', hash], capture_output=True, text=True
+	)
+	print(freeExec.args)
+	if freeExec.stderr:
+		print("stderr:", freeExec.stderr)
+
+	return freeExec.stdout
+
 def isPost(chainName, hash):
-	hash = '0_214ED611E8E377DEB8D0F35EA15E457181418739E1158A8C9082A124CF26E6CD'
+	#hash = '0_214ED611E8E377DEB8D0F35EA15E457181418739E1158A8C9082A124CF26E6CD'
 	res = getBlockInfo(chainName, hash)
 	print(res)
 	return False
@@ -270,17 +281,6 @@ def recvChainHost(chainName, hostIp, hostPort, origIp, origPort):
 	freeExec = subprocess.run(
 		['freechains', '--host='+hostIp+':'+hostPort, 'peer', origIp+':'+origPort, 'recv', "#"+str(chainName)], capture_output=True, text=True
 	)
-	if freeExec.stderr:
-		print("stderr:", freeExec.stderr)
-
-	return freeExec.stdout
-
-def getBlockInfo(chainName, hash):
-	
-	freeExec = subprocess.run(
-		["freechains", "chain", '#'+str(chainName), 'get', 'block', hash], capture_output=True, text=True
-	)
-	print(freeExec.args)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 
