@@ -347,8 +347,7 @@ def act1Menu1():
 	print('Criação de Chave\n')
 
 	password = input('Insira sua senha segura: ')
-	#publicKey,privateKey = newKey(password)
-	publicKey,privateKey = '1','2'
+	publicKey,privateKey = newKey(password)
 
 	menuType = 2
 	
