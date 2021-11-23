@@ -211,14 +211,13 @@ def isPost(chainName, hash):
 	print(type(obj))
 	print(obj)
 	if obj['sign']:
-		if obj['like']:
-			print('entrou')
+		if not obj['like']:
 			return True
 	return False
 
 def listPosts(chainName):
 	freeExec = subprocess.run(
-		['freechains', 'chain', '#'+str(chainName), 'heads'], capture_output=True, text=True
+		['freechains', 'chain', '#'+str(chainName), 'consensus'], capture_output=True, text=True
 	)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
@@ -228,7 +227,8 @@ def listPosts(chainName):
 	for post in posts:
 		post = post.replace('\n', '')
 		if isPost(chainName, post):
-			listPosts.append(post) 
+			if getRepsPost(chainName, post) != -1:
+				listPosts.append(post)
 	return listPosts
 
 def listBlockedPosts(chainName):
@@ -294,20 +294,20 @@ def updatePostList(newsPosts, posts):
 	for newPost in newsPosts:
 		p = Post()
 		p.setHash(newPost)
-		#newPost = (post, '', '')
 		for post in posts:
 			if p.getHash() == post.getHash():
 				continue
 		posts.append(p)
 
-def updateBlockedPostList(chainName):
+def updateBlockedPostList(chainName, blockedPosts):
 	newBlockedPosts = listBlockedPosts(chainName)
-	blockedPosts = []
 	for post in newBlockedPosts:
-		blockedPost = (post, '', '')
-		if blockedPost in posts:
-			continue
-		blockedPosts.append(blockedPost)
+		p = Post()
+		p.setHash(post)
+		for post in blockedPosts:
+			if p.getHash() == post.getHash():
+				continue
+		blockedPosts.append(post)
 
 def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKey=None):
 	if menuType == 1:
@@ -337,16 +337,16 @@ def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKe
 		print('Posts:\n')
 		if posts:
 			for post in posts:
-				print('File Name: '+post[(1)]+' Hash: '+post[(0)]+'\n')
+				print('File Name: '+post.getFileName()+' Hash: '+post.getHash()+'\n')
 		else:
 			print('Sem posts na Disciplina\n')
 		
 		print('Blocked Posts:\n')
-		blockedPosts = updateBlockedPostList(chainName)
+		blockedPosts = updateBlockedPostList(chainName, blockedPosts)
 
 		if blockedPosts:
 			for post in blockedPosts:
-				print('File Name: '+post[(1)]+' Hash: '+post[(0)]+'\n')
+				print('File Name: '+post.getFileName()+' Hash: '+post.getHash()+'\n')
 		else:
 			print('Sem posts bloqueados na Disciplina\n')
 	
