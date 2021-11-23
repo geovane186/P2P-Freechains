@@ -277,6 +277,7 @@ def getBlockInfo(chainName, hashBlock):
 		['freechains', 'chain', '#'+str(chainName), 'get', 'block', hashBlock], capture_output=True, text=True
 	)
 	print(freeExec.args)
+	print(freeExec.stdout)
 	if freeExec.stderr:
 		print("stderr:", freeExec.stderr)
 
