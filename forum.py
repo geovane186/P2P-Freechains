@@ -324,15 +324,14 @@ def updateBlockedPostList(chainName, blockedPosts):
 def updateChainsList(chains):
 	res = listChain().split(' ')
 	print(res)
-	if res == ['']:
-		print('vzio')
-	for i in res:
-		i = i.replace('#', '')
-		i = i.replace('\n', '')
-		print(i)
-		chain = Chain()
-		chain.setName(i)
-		chains.append(chain)
+	if res != ['']:
+		for i in res:
+			i = i.replace('#', '')
+			i = i.replace('\n', '')
+			print(i)
+			chain = Chain()
+			chain.setName(i)
+			chains.append(chain)
 
 def print_menu(menuType, posts=None, chainName=None, blockedPosts=None, publicKey=None, reputation=None):
 	if menuType == 1:
@@ -392,11 +391,12 @@ def act1Menu1():
 	
 	return password, privateKey, publicKey, menuType
 
-def act1Menu2():
-	chains = listChain()
-	if chains != '':
+def act1Menu2(chains):
+	#chains = listChain()
+	if chains != []:
 		print('\nDisciplinas:\n')
-		print(chains)
+		for chain in chains:
+			print(chain.getName())
 	else:
 		print('Não existem Disciplinas disponiveis')
 
